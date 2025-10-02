@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lessons - CyberSafe Campus</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-shield-alt me-2"></i>CyberSafe Campus
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="lessons.html">Lessons</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="quiz.html">Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html" id="loginLink">Login</a>
+          </li>
+          <li class="nav-item d-none" id="userInfo">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
+                Welcome, <span id="userName"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Lessons Header -->
+  <section class="hero-section text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h1 class="display-4 fw-bold">Cybersecurity Lessons</h1>
+          <p class="lead">Expand your knowledge with our comprehensive cybersecurity curriculum</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lessons Content -->
+  <section class="lessons-container">
+    <div class="container">
+      <div class="row">
+        <!-- Lesson Navigation -->
+        <div class="col-lg-3 mb-4">
+          <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+            <div class="card-header">
+              <h5 class="mb-0">Lesson Topics</h5>
+            </div>
+            <div class="list-group list-group-flush">
+              <a href="#password-security" class="list-group-item list-group-item-action">Password Security</a>
+              <a href="#phishing-awareness" class="list-group-item list-group-item-action">Phishing Awareness</a>
+              <a href="#malware-basics" class="list-group-item list-group-item-action">Malware Basics</a>
+              <a href="#social-engineering" class="list-group-item list-group-item-action">Social Engineering</a>
+              <a href="#network-security" class="list-group-item list-group-item-action">Network Security</a>
+              <a href="#data-protection" class="list-group-item list-group-item-action">Data Protection</a>
+              <a href="#mobile-security" class="list-group-item list-group-item-action">Mobile Security</a>
+              <a href="#incident-response" class="list-group-item list-group-item-action">Incident Response</a>
+            </div>
+            <div class="card-footer">
+              <div class="progress mb-2">
+                <div class="progress-bar" id="lessonsProgressBar" role="progressbar" style="width: 0%"></div>
+              </div>
+              <small class="text-muted">Completed <span id="completedCount">0</span> of 8 lessons</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lesson Details -->
+        <div class="col-lg-9">
+          <!-- Password Security -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="password-security" data-lesson="password-security">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Password Security</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>Why Strong Passwords Matter</h5>
+              <p>Passwords are the first line of defense against unauthorized access to your accounts and personal information. Weak passwords can be easily guessed or cracked, putting your data at risk.</p>
+              
+              <h5>Creating Strong Passwords</h5>
+              <ul>
+                <li>Use at least 12 characters</li>
+                <li>Include uppercase and lowercase letters</li>
+                <li>Add numbers and special characters</li>
+                <li>Avoid dictionary words and personal information</li>
+                <li>Consider using passphrases (e.g., "CorrectHorseBatteryStaple")</li>
+              </ul>
+              
+              <h5>Password Management Best Practices</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card bg-light border-0 mb-3">
+                    <div class="card-body">
+                      <h6><i class="fas fa-check text-success me-2"></i>Do</h6>
+                      <ul class="mb-0">
+                        <li>Use a password manager</li>
+                        <li>Enable two-factor authentication</li>
+                        <li>Use unique passwords for each account</li>
+                        <li>Change passwords after security breaches</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card bg-light border-0 mb-3">
+                    <div class="card-body">
+                      <h6><i class="fas fa-times text-danger me-2"></i>Don't</h6>
+                      <ul class="mb-0">
+                        <li>Reuse passwords across accounts</li>
+                        <li>Share passwords with others</li>
+                        <li>Write passwords on sticky notes</li>
+                        <li>Use obvious substitutions (P@ssw0rd)</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('password-security')">Mark as Complete</button>
+                <a href="quiz.html?topic=password" class="btn btn-outline-primary ms-2">Take Password Security Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phishing Awareness -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="phishing-awareness" data-lesson="phishing-awareness">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Phishing Awareness</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>What is Phishing?</h5>
+              <p>Phishing is a cyber attack that uses disguised email, text messages, or websites to trick users into revealing sensitive information, such as passwords, credit card numbers, or other personal data.</p>
+              
+              <h5>Common Phishing Techniques</h5>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-envelope text-danger fa-2x mb-3"></i>
+                      <h6>Email Phishing</h6>
+                      <p class="small">Mass emails pretending to be from legitimate organizations</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-bullseye text-warning fa-2x mb-3"></i>
+                      <h6>Spear Phishing</h6>
+                      <p class="small">Targeted attacks on specific individuals or organizations</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-phone text-info fa-2x mb-3"></i>
+                      <h6>Vishing</h6>
+                      <p class="small">Phone-based phishing using voice calls</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <h5>How to Identify Phishing Attempts</h5>
+              <ul>
+                <li>Check the sender's email address carefully</li>
+                <li>Look for spelling and grammar mistakes</li>
+                <li>Be wary of urgent or threatening language</li>
+                <li>Hover over links to see the actual URL</li>
+                <li>Verify requests for sensitive information through other channels</li>
+              </ul>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('phishing-awareness')">Mark as Complete</button>
+                <a href="quiz.html?topic=phishing" class="btn btn-outline-primary ms-2">Take Phishing Awareness Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Malware Basics -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="malware-basics" data-lesson="malware-basics">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Malware Basics</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>What is Malware?</h5>
+              <p>Malware (malicious software) is any software intentionally designed to cause damage to a computer, server, client, or computer network.</p>
+              
+              <h5>Types of Malware</h5>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Type</th>
+                      <th>Description</th>
+                      <th>Example</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Virus</strong></td>
+                      <td>Self-replicating code that attaches to clean files</td>
+                      <td>ILOVEYOU virus</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Worm</strong></td>
+                      <td>Spreads independently without user interaction</td>
+                      <td>WannaCry</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Trojan</strong></td>
+                      <td>Disguised as legitimate software</td>
+                      <td>Emotet</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Ransomware</strong></td>
+                      <td>Encrypts files and demands payment</td>
+                      <td>Ryuk</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <h5>Malware Prevention</h5>
+              <ul>
+                <li>Install and update antivirus software regularly</li>
+                <li>Keep your operating system and applications updated</li>
+                <li>Be cautious when downloading files or clicking links</li>
+                <li>Use a firewall to monitor network traffic</li>
+                <li>Back up important data regularly</li>
+              </ul>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('malware-basics')">Mark as Complete</button>
+                <a href="quiz.html?topic=malware" class="btn btn-outline-primary ms-2">Take Malware Basics Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Engineering -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="social-engineering" data-lesson="social-engineering">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Social Engineering</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>What is Social Engineering?</h5>
+              <p>Social engineering is the psychological manipulation of people into performing actions or divulging confidential information. It's essentially a con game played on unsuspecting users.</p>
+              
+              <h5>Common Social Engineering Techniques</h5>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Pretexting</h6>
+                      <p>Creating a fabricated scenario to engage a targeted victim</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Baiting</h6>
+                      <p>Offering something enticing to lure victims</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Quid Pro Quo</h6>
+                      <p>Offering a benefit in exchange for information</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Tailgating</h6>
+                      <p>Gaining physical access to restricted areas</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <h5>How to Protect Yourself</h5>
+              <ul>
+                <li>Be skeptical of unsolicited requests for information</li>
+                <li>Verify the identity of anyone requesting sensitive data</li>
+                <li>Don't let strangers follow you into secure areas</li>
+                <li>Be cautious about what you share on social media</li>
+                <li>Implement strict access control policies</li>
+              </ul>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('social-engineering')">Mark as Complete</button>
+                <a href="quiz.html?topic=social" class="btn btn-outline-primary ms-2">Take Social Engineering Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Network Security -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="network-security" data-lesson="network-security">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Network Security</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>Understanding Network Security</h5>
+              <p>Network security involves implementing measures to protect the integrity, confidentiality, and accessibility of computer networks and data.</p>
+              
+              <h5>Key Network Security Components</h5>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-fire text-danger fa-2x mb-3"></i>
+                      <h6>Firewalls</h6>
+                      <p class="small">Network security systems that monitor and control incoming and outgoing traffic</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-user-secret text-primary fa-2x mb-3"></i>
+                      <h6>VPN</h6>
+                      <p class="small">Virtual Private Networks create secure connections over public networks</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-wifi text-success fa-2x mb-3"></i>
+                      <h6>Wi-Fi Security</h6>
+                      <p class="small">Protecting wireless networks from unauthorized access</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <h5>Network Security Best Practices</h5>
+              <ul>
+                <li>Use strong encryption protocols (WPA3 for Wi-Fi)</li>
+                <li>Regularly update network devices and firmware</li>
+                <li>Implement network segmentation</li>
+                <li>Use intrusion detection and prevention systems</li>
+                <li>Monitor network traffic for suspicious activity</li>
+              </ul>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('network-security')">Mark as Complete</button>
+                <a href="quiz.html?topic=network" class="btn btn-outline-primary ms-2">Take Network Security Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Protection -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="data-protection" data-lesson="data-protection">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Data Protection</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>Importance of Data Protection</h5>
+              <p>Data protection involves safeguarding important information from corruption, compromise, or loss. In today's digital world, protecting personal and organizational data is critical.</p>
+              
+              <h5>Data Protection Strategies</h5>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Encryption</h6>
+                      <p>Converting data into a code to prevent unauthorized access. Use encryption for sensitive files and communications.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Backup Solutions</h6>
+                      <p>Regularly backing up data to secure locations ensures recovery in case of data loss or ransomware attacks.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Access Controls</h6>
+                      <p>Implementing role-based access controls to ensure only authorized users can access specific data.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0">
+                    <div class="card-body">
+                      <h6>Data Classification</h6>
+                      <p>Categorizing data based on sensitivity to apply appropriate protection measures.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <h5>Data Protection Best Practices</h5>
+              <ul>
+                <li>Implement the principle of least privilege</li>
+                <li>Use strong encryption for sensitive data</li>
+                <li>Regularly backup important data</li>
+                <li>Securely dispose of data no longer needed</li>
+                <li>Educate users about data handling procedures</li>
+              </ul>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('data-protection')">Mark as Complete</button>
+                <a href="quiz.html?topic=data" class="btn btn-outline-primary ms-2">Take Data Protection Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Security -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="mobile-security" data-lesson="mobile-security">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Mobile Security</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>Mobile Device Security Challenges</h5>
+              <p>Mobile devices present unique security challenges due to their portability, constant connectivity, and the vast amount of personal and corporate data they contain.</p>
+              
+              <h5>Mobile Security Threats</h5>
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Threat</th>
+                      <th>Description</th>
+                      <th>Protection</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Malicious Apps</strong></td>
+                      <td>Apps that contain malware or spyware</td>
+                      <td>Download only from official app stores</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Unsecured Wi-Fi</strong></td>
+                      <td>Public networks that can intercept data</td>
+                      <td>Use VPN on public networks</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Device Theft/Loss</strong></td>
+                      <td>Physical loss of device containing sensitive data</td>
+                      <td>Enable remote wipe and strong authentication</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Phishing Attacks</strong></td>
+                      <td>Fake messages designed to steal credentials</td>
+                      <td>Be cautious of unsolicited messages</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <h5>Mobile Security Best Practices</h5>
+              <ul>
+                <li>Use strong authentication (biometrics, PINs)</li>
+                <li>Keep devices and apps updated</li>
+                <li>Install apps only from official stores</li>
+                <li>Use VPN on public Wi-Fi networks</li>
+                <li>Enable remote tracking and wiping</li>
+                <li>Be cautious of public charging stations</li>
+              </ul>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('mobile-security')">Mark as Complete</button>
+                <a href="quiz.html?topic=mobile" class="btn btn-outline-primary ms-2">Take Mobile Security Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Incident Response -->
+          <div class="lesson-card card shadow-sm border-0 mb-4" id="incident-response" data-lesson="incident-response">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">Incident Response</h4>
+              <span class="badge bg-success completed-badge" style="display: none;"><i class="fas fa-check me-1"></i>Completed</span>
+            </div>
+            <div class="card-body">
+              <h5>What is Incident Response?</h5>
+              <p>Incident response is an organized approach to addressing and managing the aftermath of a security breach or cyberattack. The goal is to handle the situation in a way that limits damage and reduces recovery time and costs.</p>
+              
+              <h5>Incident Response Lifecycle</h5>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-search text-primary fa-2x mb-3"></i>
+                      <h6>Preparation</h6>
+                      <p class="small">Developing policies, plans, and teams before incidents occur</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-exclamation-triangle text-warning fa-2x mb-3"></i>
+                      <h6>Detection & Analysis</h6>
+                      <p class="small">Identifying potential security incidents and determining their scope</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-first-aid text-danger fa-2x mb-3"></i>
+                      <h6>Containment & Eradication</h6>
+                      <p class="small">Limiting the damage and removing the threat from the environment</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-undo text-info fa-2x mb-3"></i>
+                      <h6>Recovery</h6>
+                      <p class="small">Restoring systems and operations to normal</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card h-100 border-0 bg-light">
+                    <div class="card-body text-center">
+                      <i class="fas fa-clipboard-list text-success fa-2x mb-3"></i>
+                      <h6>Post-Incident Activity</h6>
+                      <p class="small">Documenting lessons learned and improving security measures</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <h5>Key Steps in Incident Response</h5>
+              <ul>
+                <li>Identify and confirm the incident</li>
+                <li>Contain the incident to prevent further damage</li>
+                <li>Eradicate the root cause of the incident</li>
+                <li>Recover systems and data</li>
+                <li>Conduct post-incident analysis and documentation</li>
+                <li>Implement improvements to prevent recurrence</li>
+              </ul>
+              
+              <div class="mt-4">
+                <button class="btn btn-primary" onclick="markLessonComplete('incident-response')">Mark as Complete</button>
+                <a href="quiz.html?topic=incident" class="btn btn-outline-primary ms-2">Take Incident Response Quiz</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info mt-4">
+            <h5><i class="fas fa-lightbulb me-2"></i>Learning Tip</h5>
+            <p class="mb-0">Complete all lessons before attempting the comprehensive quiz to maximize your score!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+      <p>&copy; 2023 CyberSafe Campus. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/lessons.js"></script>
+</body>
+</html>

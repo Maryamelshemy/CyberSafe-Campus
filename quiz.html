@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - CyberSafe Campus</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-shield-alt me-2"></i>CyberSafe Campus
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lessons.html">Lessons</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="quiz.html">Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="leaderboard.html">Leaderboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html" id="loginLink">Login</a>
+          </li>
+          <li class="nav-item d-none" id="userInfo">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
+                Welcome, <span id="userName"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Quiz Header -->
+  <section class="hero-section text-white py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h1 class="display-5 fw-bold">Cybersecurity Quiz</h1>
+          <p class="lead">Test your knowledge and earn your place on the leaderboard</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz Selection -->
+  <section class="py-5" id="quizSelection">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card shadow border-0">
+            <div class="card-header text-center py-4">
+              <h3 class="mb-0">Select Quiz Type</h3>
+            </div>
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="card h-100 border-0 shadow-sm quiz-option" data-type="comprehensive">
+                    <div class="card-body text-center p-4">
+                      <i class="fas fa-globe fa-3x text-primary mb-3"></i>
+                      <h5>Comprehensive Quiz</h5>
+                      <p class="text-muted">Test your knowledge across all cybersecurity topics</p>
+                      <div class="mt-3">
+                        <span class="badge bg-primary">10 Questions</span>
+                        <span class="badge bg-secondary">All Topics</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="card h-100 border-0 shadow-sm quiz-option" data-type="topic">
+                    <div class="card-body text-center p-4">
+                      <i class="fas fa-book fa-3x text-success mb-3"></i>
+                      <h5>Topic-Specific Quiz</h5>
+                      <p class="text-muted">Focus on a specific cybersecurity area</p>
+                      <div class="mt-3">
+                        <span class="badge bg-success">5 Questions</span>
+                        <span class="badge bg-secondary">Single Topic</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Topic Selection (Hidden by default) -->
+              <div class="mt-4 d-none" id="topicSelection">
+                <h5 class="mb-3">Select a Topic</h5>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="topic" id="password" value="password">
+                      <label class="form-check-label" for="password">
+                        Password Security
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="topic" id="phishing" value="phishing">
+                      <label class="form-check-label" for="phishing">
+                        Phishing Awareness
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="topic" id="malware" value="malware">
+                      <label class="form-check-label" for="malware">
+                        Malware Basics
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="topic" id="social" value="social">
+                      <label class="form-check-label" for="social">
+                        Social Engineering
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="d-grid mt-4">
+                <button class="btn btn-primary btn-lg" id="startQuizBtn">Start Quiz</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz Interface (Hidden by default) -->
+  <section class="py-5 d-none" id="quizInterface">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card shadow border-0">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="mb-0" id="quizTitle">Cybersecurity Quiz</h5>
+              <div>
+                <span class="badge bg-light text-dark" id="timer">10:00</span>
+                <span class="badge bg-light text-dark ms-2">Question <span id="currentQuestion">1</span>/<span id="totalQuestions">10</span></span>
+              </div>
+            </div>
+            <div class="card-body p-4">
+              <div class="progress mb-4" style="height: 8px;">
+                <div class="progress-bar" id="progressBar" role="progressbar" style="width: 10%;"></div>
+              </div>
+              
+              <form id="quizForm">
+                <div id="questionsContainer">
+                  <!-- Questions will be dynamically inserted here -->
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                  <button type="button" class="btn btn-outline-primary" id="prevBtn" disabled>Previous</button>
+                  <button type="button" class="btn btn-primary" id="nextBtn">Next Question</button>
+                  <button type="submit" class="btn btn-success d-none" id="submitBtn">Submit Quiz</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results (Hidden by default) -->
+  <section class="py-5 d-none" id="resultsSection">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card shadow border-0 text-center">
+            <div class="card-body p-5">
+              <div class="mb-4">
+                <i class="fas fa-trophy fa-4x text-warning mb-3"></i>
+                <h2 class="fw-bold">Quiz Complete!</h2>
+                <p class="text-muted">Here's how you performed</p>
+              </div>
+              
+              <div class="row mb-4">
+                <div class="col-md-6 mb-3">
+                  <div class="card bg-light border-0">
+                    <div class="card-body">
+                      <h3 class="fw-bold text-primary" id="scoreDisplay">0/10</h3>
+                      <p class="mb-0">Your Score</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="card bg-light border-0">
+                    <div class="card-body">
+                      <h3 class="fw-bold text-success" id="percentageDisplay">0%</h3>
+                      <p class="mb-0">Percentage</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="alert alert-success" id="successMessage" style="display: none;">
+                <h5><i class="fas fa-check-circle me-2"></i>Congratulations!</h5>
+                <p class="mb-0" id="congratsText">Your score has been recorded on the leaderboard.</p>
+              </div>
+              
+              <div class="alert alert-warning" id="loginMessage" style="display: none;">
+                <h5><i class="fas fa-exclamation-triangle me-2"></i>Login Required</h5>
+                <p class="mb-0">Please log in to save your score to the leaderboard.</p>
+              </div>
+              
+              <div class="mt-4">
+                <a href="leaderboard.html" class="btn btn-primary me-2">View Leaderboard</a>
+                <a href="quiz.html" class="btn btn-outline-primary">Take Another Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container text-center">
+      <p>&copy; 2023 CyberSafe Campus. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/quiz-data.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
