@@ -1,48 +1,82 @@
-// js/quiz.js - Complete quiz functionality
+// js/quiz.js - Quiz functionality for your HTML structure
 
 let currentQuiz = null;
 let currentQuestionIndex = 0;
-let score = 0;
+let userAnswers = [];
 let timer = null;
 let timeLeft = 0;
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Quiz system initialized');
-    initializeQuizButtons();
-    
-    // Check if we're already on a quiz page
-    if (window.location.pathname.includes('quiz.html')) {
-        setupQuizPage();
-    }
+    initializeQuizSelection();
+    checkUserLoginStatus();
 });
 
-function initializeQuizButtons() {
-    // Add click events to all quiz buttons
-    const quizButtons = document.querySelectorAll('[data-quiz], .quiz-btn, .start-quiz, .quiz-card');
-    
-    quizButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const quizType = this.getAttribute('data-quiz-type') || 'comprehensive';
-            const topic = this.getAttribute('data-topic');
-            console.log('Starting quiz:', quizType, topic);
-            startQuiz(quizType, topic);
+function initializeQuizSelection() {
+    // Quiz type selection
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Remove active class from all options
+            quizOptions.forEach(opt => opt.classList.remove('active'));
+            // Add active class to clicked option
+            this.classList.add('active');
+            
+            const quizType = this.getAttribute('data-type');
+            handleQuizTypeSelection(quizType);
         });
     });
     
-    console.log('Initialized quiz buttons:', quizButtons.length);
+    // Start quiz button
+    const startBtn = document.getElementById('startQuizBtn');
+    if (startBtn) {
+        startBtn.addEventListener('click', startSelectedQuiz);
+    }
+    
+    // Quiz navigation buttons
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (prevBtn) prevBtn.addEventListener('click', showPreviousQuestion);
+    if (nextBtn) nextBtn.addEventListener('click', showNextQuestion);
+    if (submitBtn) submitBtn.addEventListener('click', submitQuiz);
 }
 
-function setupQuizPage() {
-    // If we're on quiz.html, set up the interface
-    const urlParams = new URLSearchParams(window.location.search);
-    const quizType = urlParams.get('type') || 'comprehensive';
-    const topic = urlParams.get('topic');
+function handleQuizTypeSelection(quizType) {
+    const topicSelection = document.getElementById('topicSelection');
     
-    if (quizType || topic) {
-        startQuiz(quizType, topic);
+    if (quizType === 'topic') {
+        topicSelection.classList.remove('d-none');
+    } else {
+        topicSelection.classList.add('d-none');
+        // Clear any selected topics
+        const topicRadios = document.querySelectorAll('input[name="topic"]');
+        topicRadios.forEach(radio => radio.checked = false);
     }
+}
+
+function startSelectedQuiz() {
+    const activeQuizOption = document.querySelector('.quiz-option.active');
+    if (!activeQuizOption) {
+        alert('Please select a quiz type first!');
+        return;
+    }
+    
+    const quizType = activeQuizOption.getAttribute('data-type');
+    let topic = null;
+    
+    if (quizType === 'topic') {
+        const selectedTopic = document.querySelector('input[name="topic"]:checked');
+        if (!selectedTopic) {
+            alert('Please select a topic for the quiz!');
+            return;
+        }
+        topic = selectedTopic.value;
+    }
+    
+    startQuiz(quizType, topic);
 }
 
 function startQuiz(quizType, topic = null) {
@@ -51,156 +85,139 @@ function startQuiz(quizType, topic = null) {
     // Get quiz data
     currentQuiz = getQuizQuestions(quizType, topic);
     
-    if (!currentQuiz || !currentQuiz.questions) {
-        console.error('Quiz data not found');
-        showError('Quiz data not available. Please try again.');
+    if (!currentQuiz || !currentQuiz.questions || currentQuiz.questions.length === 0) {
+        alert('Quiz data not available. Please try again.');
         return;
     }
     
     // Reset quiz state
     currentQuestionIndex = 0;
-    score = 0;
+    userAnswers = new Array(currentQuiz.questions.length).fill(null);
     
-    // Redirect to quiz page if not already there
-    if (!window.location.pathname.includes('quiz.html')) {
-        window.location.href = `quiz.html?type=${quizType}${topic ? '&topic=' + topic : ''}`;
-        return;
-    }
+    // Hide selection, show quiz interface
+    document.getElementById('quizSelection').classList.add('d-none');
+    document.getElementById('quizInterface').classList.remove('d-none');
+    document.getElementById('resultsSection').classList.add('d-none');
     
-    // Setup timer if available
+    // Setup timer
     if (currentQuiz.timeLimit) {
         timeLeft = currentQuiz.timeLimit;
         startTimer();
     }
     
-    // Show quiz interface
-    showQuizInterface();
+    // Update quiz info
+    document.getElementById('quizTitle').textContent = currentQuiz.title;
+    document.getElementById('totalQuestions').textContent = currentQuiz.questions.length;
     
     // Display first question
     displayCurrentQuestion();
 }
 
-function showQuizInterface() {
-    // Hide any other sections and show quiz container
-    const sections = document.querySelectorAll('section, .container');
-    sections.forEach(section => {
-        if (section.id !== 'quiz-container') {
-            section.style.display = 'none';
-        }
-    });
-    
-    const quizContainer = document.getElementById('quiz-container');
-    if (quizContainer) {
-        quizContainer.style.display = 'block';
-        quizContainer.innerHTML = '<div class="quiz-loading">Loading quiz...</div>';
-    }
-}
-
 function displayCurrentQuestion() {
-    if (!currentQuiz || !currentQuiz.questions[currentQuestionIndex]) {
+    if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
         endQuiz();
         return;
     }
     
     const question = currentQuiz.questions[currentQuestionIndex];
-    const quizContainer = document.getElementById('quiz-container');
+    const questionsContainer = document.getElementById('questionsContainer');
+    const progressBar = document.getElementById('progressBar');
+    const currentQuestionSpan = document.getElementById('currentQuestion');
     
-    if (!quizContainer) return;
+    // Update progress
+    const progress = ((currentQuestionIndex + 1) / currentQuiz.questions.length) * 100;
+    progressBar.style.width = `${progress}%`;
+    currentQuestionSpan.textContent = currentQuestionIndex + 1;
     
-    quizContainer.innerHTML = `
-        <div class="quiz-header">
-            <h2 id="quiz-title">${currentQuiz.title}</h2>
-            <div class="quiz-progress">
-                <span>Question ${currentQuestionIndex + 1} of ${currentQuiz.questions.length}</span>
-                ${currentQuiz.timeLimit ? `<div class="timer">Time Left: <span id="time-left">${formatTime(timeLeft)}</span></div>` : ''}
-            </div>
-        </div>
-        
-        <div class="question-container">
-            <h3 class="question-text">${question.text}</h3>
-            <div class="options-container">
+    // Create question HTML
+    questionsContainer.innerHTML = `
+        <div class="question mb-4">
+            <h4 class="mb-3">${question.text}</h4>
+            <div class="options">
                 ${question.options.map((option, index) => `
-                    <button class="option-btn" data-answer="${index}">
-                        <span class="option-letter">${String.fromCharCode(65 + index)}</span>
-                        <span class="option-text">${option}</span>
-                    </button>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="question${question.id}" 
+                               id="option${question.id}_${index}" value="${index}"
+                               ${userAnswers[currentQuestionIndex] === index ? 'checked' : ''}>
+                        <label class="form-check-label" for="option${question.id}_${index}">
+                            ${option}
+                        </label>
+                    </div>
                 `).join('')}
             </div>
         </div>
-        
-        <div class="quiz-controls">
-            <button id="next-btn" class="btn-primary" style="display: none;">Next Question</button>
-        </div>
     `;
     
-    // Add event listeners
-    const optionButtons = document.querySelectorAll('.option-btn');
-    optionButtons.forEach(button => {
-        button.addEventListener('click', handleAnswer);
-    });
+    // Update navigation buttons
+    updateNavigationButtons();
     
-    document.getElementById('next-btn').addEventListener('click', nextQuestion);
+    // Add event listeners to radio buttons
+    const radioButtons = questionsContainer.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function() {
+            userAnswers[currentQuestionIndex] = parseInt(this.value);
+            updateNavigationButtons();
+        });
+    });
 }
 
-function handleAnswer(e) {
-    const selectedAnswer = parseInt(e.target.closest('.option-btn').getAttribute('data-answer'));
-    const question = currentQuiz.questions[currentQuestionIndex];
-    const optionButtons = document.querySelectorAll('.option-btn');
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
     
-    // Disable all buttons
-    optionButtons.forEach(button => {
-        button.disabled = true;
-        button.style.cursor = 'not-allowed';
-    });
+    // Previous button
+    prevBtn.disabled = currentQuestionIndex === 0;
     
-    // Show correct/incorrect
-    optionButtons.forEach((button, index) => {
-        if (index === question.correctAnswer) {
-            button.classList.add('correct');
-        } else if (index === selectedAnswer && index !== question.correctAnswer) {
-            button.classList.add('incorrect');
-        }
-    });
+    // Next/Submit buttons
+    const hasAnswer = userAnswers[currentQuestionIndex] !== null;
     
-    // Update score
-    if (selectedAnswer === question.correctAnswer) {
-        score++;
-    }
-    
-    // Show explanation
-    const questionContainer = document.querySelector('.question-container');
-    const explanationDiv = document.createElement('div');
-    explanationDiv.className = 'explanation';
-    explanationDiv.innerHTML = `
-        <div class="explanation-content">
-            <strong>Explanation:</strong> ${question.explanation}
-        </div>
-    `;
-    questionContainer.appendChild(explanationDiv);
-    
-    // Show next button
-    document.getElementById('next-btn').style.display = 'block';
-}
-
-function nextQuestion() {
-    currentQuestionIndex++;
-    
-    if (currentQuestionIndex < currentQuiz.questions.length) {
-        displayCurrentQuestion();
+    if (currentQuestionIndex === currentQuiz.questions.length - 1) {
+        nextBtn.classList.add('d-none');
+        submitBtn.classList.remove('d-none');
+        submitBtn.disabled = !hasAnswer;
     } else {
-        endQuiz();
+        nextBtn.classList.remove('d-none');
+        submitBtn.classList.add('d-none');
+        nextBtn.disabled = !hasAnswer;
     }
+}
+
+function showPreviousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayCurrentQuestion();
+    }
+}
+
+function showNextQuestion() {
+    if (userAnswers[currentQuestionIndex] !== null && currentQuestionIndex < currentQuiz.questions.length - 1) {
+        currentQuestionIndex++;
+        displayCurrentQuestion();
+    }
+}
+
+function submitQuiz(event) {
+    if (event) event.preventDefault();
+    
+    if (userAnswers[currentQuestionIndex] === null) {
+        alert('Please answer the current question before submitting.');
+        return;
+    }
+    
+    endQuiz();
 }
 
 function startTimer() {
     if (timer) clearInterval(timer);
     
+    const timerDisplay = document.getElementById('timer');
+    
     timer = setInterval(() => {
         timeLeft--;
         
-        const timeDisplay = document.getElementById('time-left');
-        if (timeDisplay) {
-            timeDisplay.textContent = formatTime(timeLeft);
+        if (timerDisplay) {
+            timerDisplay.textContent = formatTime(timeLeft);
         }
         
         if (timeLeft <= 0) {
@@ -219,50 +236,104 @@ function formatTime(seconds) {
 function endQuiz() {
     if (timer) clearInterval(timer);
     
-    const quizContainer = document.getElementById('quiz-container');
-    if (!quizContainer) return;
+    // Calculate score
+    let score = 0;
+    currentQuiz.questions.forEach((question, index) => {
+        if (userAnswers[index] === question.correctAnswer) {
+            score++;
+        }
+    });
     
     const percentage = Math.round((score / currentQuiz.questions.length) * 100);
     
-    quizContainer.innerHTML = `
-        <div class="quiz-results">
-            <div class="result-card">
-                <h2>🎉 Quiz Complete!</h2>
-                <div class="score-display">
-                    <h3>Your Score: ${score}/${currentQuiz.questions.length}</h3>
-                    <div class="percentage">${percentage}%</div>
-                    <p class="score-message">${getScoreMessage(percentage)}</p>
-                </div>
-                <div class="quiz-actions">
-                    <button id="retry-quiz" class="btn-primary">Retry Quiz</button>
-                    <button id="back-to-lessons" class="btn-secondary">Back to Lessons</button>
-                    <button id="view-leaderboard" class="btn-secondary">View Leaderboard</button>
-                </div>
-            </div>
-        </div>
-    `;
+    // Show results section
+    document.getElementById('quizInterface').classList.add('d-none');
+    document.getElementById('resultsSection').classList.remove('d-none');
     
-    // Add event listeners to result buttons
-    document.getElementById('retry-quiz').addEventListener('click', () => {
-        startQuiz(currentQuiz.id);
-    });
+    // Update results display
+    document.getElementById('scoreDisplay').textContent = `${score}/${currentQuiz.questions.length}`;
+    document.getElementById('percentageDisplay').textContent = `${percentage}%`;
     
-    document.getElementById('back-to-lessons').addEventListener('click', () => {
-        window.location.href = 'lessons.html';
-    });
+    // Show appropriate message
+    const successMessage = document.getElementById('successMessage');
+    const loginMessage = document.getElementById('loginMessage');
+    const congratsText = document.getElementById('congratsText');
     
-    document.getElementById('view-leaderboard').addEventListener('click', () => {
-        window.location.href = 'leaderboard.html';
-    });
+    if (isUserLoggedIn()) {
+        successMessage.style.display = 'block';
+        loginMessage.style.display = 'none';
+        congratsText.textContent = getScoreMessage(percentage);
+        saveScoreToLeaderboard(score, percentage, currentQuiz.title);
+    } else {
+        successMessage.style.display = 'none';
+        loginMessage.style.display = 'block';
+    }
 }
 
 function getScoreMessage(percentage) {
-    if (percentage >= 90) return 'Excellent! You\'re a cybersecurity expert!';
-    if (percentage >= 70) return 'Great job! You have strong cybersecurity knowledge.';
-    if (percentage >= 50) return 'Good effort! Keep learning to improve your skills.';
-    return 'Keep studying! Cybersecurity is an important skill to master.';
+    if (percentage >= 90) return 'Excellent! You\'re a cybersecurity expert! Your score has been recorded.';
+    if (percentage >= 70) return 'Great job! You have strong cybersecurity knowledge. Score recorded!';
+    if (percentage >= 50) return 'Good effort! Keep learning to improve your skills. Score recorded.';
+    return 'Keep studying! Cybersecurity is an important skill to master. Score recorded.';
 }
 
-function showError(message) {
-    alert(message); // You can replace this with a better error display
+function isUserLoggedIn() {
+    // Check if user is logged in (you'll need to implement this based on your auth system)
+    return localStorage.getItem('currentUser') !== null;
 }
+
+function checkUserLoginStatus() {
+    // Update UI based on login status
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (user) {
+        document.getElementById('userName').textContent = user.username;
+        document.getElementById('userInfo').classList.remove('d-none');
+        document.getElementById('loginLink').classList.add('d-none');
+    }
+}
+
+function saveScoreToLeaderboard(score, percentage, quizName) {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) return;
+    
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    
+    const newEntry = {
+        username: user.username,
+        score: score,
+        percentage: percentage,
+        quiz: quizName,
+        date: new Date().toLocaleDateString(),
+        timestamp: new Date().getTime()
+    };
+    
+    leaderboard.push(newEntry);
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+}
+
+// Add this CSS to your CSS.css file for better styling
+const additionalCSS = `
+.quiz-option {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.quiz-option:hover {
+    transform: translateY(-2px);
+}
+
+.quiz-option.active {
+    border: 2px solid #007bff !important;
+}
+
+.form-check-input:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.progress-bar {
+    transition: width 0.3s ease;
+}
+`;
+
+console.log('Add this CSS to your CSS.css file for better quiz styling:', additionalCSS);
