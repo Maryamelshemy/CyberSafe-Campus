@@ -1,10 +1,10 @@
-// js/quiz-data.js - Complete quiz data
+// js/quiz-data.js - Enhanced quiz data with more questions
 
 const quizData = {
   comprehensive: {
     id: 'comprehensive',
     title: 'Comprehensive Cybersecurity Quiz',
-    timeLimit: 600, // 10 minutes
+    timeLimit: 900, // 15 minutes
     questions: [
       {
         id: 1,
@@ -70,6 +70,71 @@ const quizData = {
         correctAnswer: 1,
         explanation: '2FA adds an extra layer of security by requiring something you know (password) and something you have (phone, token).',
         topic: 'password'
+      },
+      {
+        id: 6,
+        text: 'Which of these is an example of social engineering?',
+        options: [
+          'A virus that replicates itself across networks',
+          'An email pretending to be from your bank asking for account details',
+          'A firewall blocking unauthorized access',
+          'Encrypting sensitive files on your computer'
+        ],
+        correctAnswer: 1,
+        explanation: 'Social engineering involves psychological manipulation rather than technical hacking methods.',
+        topic: 'social'
+      },
+      {
+        id: 7,
+        text: 'What is the purpose of a VPN?',
+        options: [
+          'To make your computer run faster',
+          'To create a secure connection over the internet',
+          'To protect against viruses and malware',
+          'To backup your important files'
+        ],
+        correctAnswer: 1,
+        explanation: 'A VPN creates an encrypted tunnel for your internet traffic, enhancing privacy and security.',
+        topic: 'network'
+      },
+      {
+        id: 8,
+        text: 'Which practice helps protect against ransomware attacks?',
+        options: [
+          'Using the same password for multiple accounts',
+          'Regularly backing up important data',
+          'Disabling your antivirus software',
+          'Opening email attachments from unknown senders'
+        ],
+        correctAnswer: 1,
+        explanation: 'Regular backups ensure you can restore your files without paying ransom if attacked.',
+        topic: 'malware'
+      },
+      {
+        id: 9,
+        text: 'What does HTTPS in a website URL indicate?',
+        options: [
+          'The website is hosted on a fast server',
+          'The connection to the website is encrypted',
+          'The website contains secure payment options',
+          'The website is verified by Google'
+        ],
+        correctAnswer: 1,
+        explanation: 'HTTPS indicates that the connection between your browser and the website is encrypted.',
+        topic: 'network'
+      },
+      {
+        id: 10,
+        text: 'Why should you be cautious about using public Wi-Fi?',
+        options: [
+          'It might slow down your device',
+          'It could expose your data to eavesdroppers',
+          'It might install unwanted software',
+          'It could damage your device hardware'
+        ],
+        correctAnswer: 1,
+        explanation: 'Public Wi-Fi networks are often unsecured, making it easier for attackers to intercept your data.',
+        topic: 'network'
       }
     ]
   },
@@ -77,7 +142,7 @@ const quizData = {
   password: {
     id: 'password',
     title: 'Password Security Quiz',
-    timeLimit: 300, // 5 minutes
+    timeLimit: 600, // 10 minutes
     questions: [
       {
         id: 1,
@@ -117,6 +182,32 @@ const quizData = {
         correctAnswer: 2,
         explanation: 'Strong passwords combine length, various character types, and avoid predictable patterns.',
         topic: 'password'
+      },
+      {
+        id: 4,
+        text: 'How often should you change your passwords?',
+        options: [
+          'Every week',
+          'Every month',
+          'Only when you suspect a breach',
+          'Every 3-6 months for critical accounts'
+        ],
+        correctAnswer: 3,
+        explanation: 'Regular password changes are recommended, especially for important accounts.',
+        topic: 'password'
+      },
+      {
+        id: 5,
+        text: 'What is a password phrase?',
+        options: [
+          'A single word password',
+          'A sequence of random characters',
+          'A memorable sentence used as a password',
+          'A password that includes special characters'
+        ],
+        correctAnswer: 2,
+        explanation: 'Password phrases are long, memorable sentences that provide good security.',
+        topic: 'password'
       }
     ]
   },
@@ -124,7 +215,7 @@ const quizData = {
   phishing: {
     id: 'phishing',
     title: 'Phishing Awareness Quiz',
-    timeLimit: 300,
+    timeLimit: 600,
     questions: [
       {
         id: 1,
@@ -151,6 +242,45 @@ const quizData = {
         correctAnswer: 2,
         explanation: 'Reporting suspicious emails to IT professionals helps protect the entire organization.',
         topic: 'phishing'
+      },
+      {
+        id: 3,
+        text: 'Which of these is a red flag in an email?',
+        options: [
+          'Proper grammar and spelling',
+          'Familiar sender address',
+          'Requests for sensitive information',
+          'Clear contact information'
+        ],
+        correctAnswer: 2,
+        explanation: 'Legitimate organizations rarely ask for sensitive information via email.',
+        topic: 'phishing'
+      },
+      {
+        id: 4,
+        text: 'What is "spear phishing"?',
+        options: [
+          'Phishing attacks targeting specific individuals',
+          'Phishing using phone calls',
+          'Phishing through social media',
+          'Phishing that uses encrypted messages'
+        ],
+        correctAnswer: 0,
+        explanation: 'Spear phishing targets specific individuals with personalized messages.',
+        topic: 'phishing'
+      },
+      {
+        id: 5,
+        text: 'How can you verify a suspicious email?',
+        options: [
+          'By clicking all links in the email',
+          'By contacting the organization directly using official contact information',
+          'By replying to the email asking for verification',
+          'By checking if your friends received the same email'
+        ],
+        correctAnswer: 1,
+        explanation: 'Always use official contact methods from the organization\'s website, not the email itself.',
+        topic: 'phishing'
       }
     ]
   },
@@ -158,7 +288,7 @@ const quizData = {
   malware: {
     id: 'malware',
     title: 'Malware Basics Quiz',
-    timeLimit: 300,
+    timeLimit: 600,
     questions: [
       {
         id: 1,
@@ -185,6 +315,45 @@ const quizData = {
         correctAnswer: 1,
         explanation: 'Ransomware encrypts files and demands ransom for decryption.',
         topic: 'malware'
+      },
+      {
+        id: 3,
+        text: 'What is a Trojan horse?',
+        options: [
+          'Malware that replicates itself',
+          'Malware disguised as legitimate software',
+          'Malware that spreads through networks',
+          'Malware that records keystrokes'
+        ],
+        correctAnswer: 1,
+        explanation: 'Trojans appear to be useful software but contain malicious code.',
+        topic: 'malware'
+      },
+      {
+        id: 4,
+        text: 'How can you prevent malware infections?',
+        options: [
+          'By never using the internet',
+          'By keeping software updated and using antivirus',
+          'By using only mobile devices',
+          'By disabling all security features'
+        ],
+        correctAnswer: 1,
+        explanation: 'Regular updates and antivirus software are key to malware prevention.',
+        topic: 'malware'
+      },
+      {
+        id: 5,
+        text: 'What does antivirus software do?',
+        options: [
+          'Makes your computer faster',
+          'Prevents all cyber attacks',
+          'Detects and removes malicious software',
+          'Encrypts your internet connection'
+        ],
+        correctAnswer: 2,
+        explanation: 'Antivirus software scans for, detects, and removes malware.',
+        topic: 'malware'
       }
     ]
   },
@@ -192,7 +361,7 @@ const quizData = {
   social: {
     id: 'social',
     title: 'Social Engineering Quiz',
-    timeLimit: 300,
+    timeLimit: 600,
     questions: [
       {
         id: 1,
@@ -218,6 +387,45 @@ const quizData = {
         ],
         correctAnswer: 1,
         explanation: 'Pretexting involves creating a fabricated scenario to obtain information.',
+        topic: 'social'
+      },
+      {
+        id: 3,
+        text: 'How can you protect against social engineering?',
+        options: [
+          'By using stronger passwords',
+          'By being skeptical of unsolicited requests',
+          'By installing a firewall',
+          'By using incognito mode'
+        ],
+        correctAnswer: 1,
+        explanation: 'Critical thinking and verification are key defenses against social engineering.',
+        topic: 'social'
+      },
+      {
+        id: 4,
+        text: 'What is "tailgating" in security?',
+        options: [
+          'Following someone into a secure area',
+          'Sending spam emails',
+          'Creating fake social media profiles',
+          'Intercepting network traffic'
+        ],
+        correctAnswer: 0,
+        explanation: 'Tailgating is physically following someone into a restricted area.',
+        topic: 'social'
+      },
+      {
+        id: 5,
+        text: 'Why is social engineering often successful?',
+        options: [
+          'Because people are naturally trusting',
+          'Because computers are vulnerable',
+          'Because encryption is weak',
+          'Because firewalls don\'t work'
+        ],
+        correctAnswer: 0,
+        explanation: 'Social engineering exploits human psychology and trust.',
         topic: 'social'
       }
     ]
