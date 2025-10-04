@@ -2,12 +2,11 @@
 
 // Initialize authentication system
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Auth system initializing...');
     initializeAuthSystem();
 });
 
 function initializeAuthSystem() {
-    console.log('Initializing authentication system...');
-    
     // Initialize users storage if not exists
     initializeUsersStorage();
     
@@ -50,40 +49,54 @@ function initializeUsersStorage() {
 }
 
 function setupAuthEventListeners() {
+    console.log('Setting up auth event listeners...');
+    
     // Login form
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', handleLoginSubmit);
+        console.log('Login form listener added');
     }
     
     // Register form
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', handleRegisterSubmit);
+        console.log('Register form listener added');
     }
     
     // Form switching
     const showRegister = document.getElementById('showRegister');
     const showLogin = document.getElementById('showLogin');
     
-    if (showRegister) showRegister.addEventListener('click', showRegisterForm);
-    if (showLogin) showLogin.addEventListener('click', showLoginForm);
+    if (showRegister) {
+        showRegister.addEventListener('click', showRegisterForm);
+        console.log('Show register listener added');
+    }
+    
+    if (showLogin) {
+        showLogin.addEventListener('click', showLoginForm);
+        console.log('Show login listener added');
+    }
 }
 
 function showRegisterForm(e) {
     if (e) e.preventDefault();
+    console.log('Showing register form');
     document.getElementById('loginFormContainer').classList.add('d-none');
     document.getElementById('registerFormContainer').classList.remove('d-none');
 }
 
 function showLoginForm(e) {
     if (e) e.preventDefault();
+    console.log('Showing login form');
     document.getElementById('registerFormContainer').classList.add('d-none');
     document.getElementById('loginFormContainer').classList.remove('d-none');
 }
 
 function handleLoginSubmit(e) {
     e.preventDefault();
+    console.log('Login form submitted');
     
     const username = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value;
@@ -109,6 +122,7 @@ function handleLoginSubmit(e) {
 
 function handleRegisterSubmit(e) {
     e.preventDefault();
+    console.log('Register form submitted');
     
     const username = document.getElementById('regUsername').value.trim();
     const email = document.getElementById('regEmail').value.trim();
@@ -271,6 +285,7 @@ function generateSessionId() {
 function checkCurrentAuthStatus() {
     const currentUser = getCurrentUser();
     if (currentUser && window.location.pathname.includes('login.html')) {
+        console.log('User already logged in, redirecting...');
         // User is already logged in, redirect to home
         setTimeout(() => {
             window.location.href = 'index.html';
@@ -280,7 +295,9 @@ function checkCurrentAuthStatus() {
 
 function getCurrentUser() {
     try {
-        return JSON.parse(localStorage.getItem('current_user'));
+        const user = JSON.parse(localStorage.getItem('current_user'));
+        console.log('Current user:', user);
+        return user;
     } catch (error) {
         console.error('Error getting current user:', error);
         return null;
@@ -332,6 +349,7 @@ function showAuthMessage(message, type) {
 
 // Quick login function for demo accounts
 function quickLogin(username, password) {
+    console.log('Quick login:', username);
     document.getElementById('loginUsername').value = username;
     document.getElementById('loginPassword').value = password;
     
@@ -343,6 +361,7 @@ function quickLogin(username, password) {
 
 // Global logout function
 window.logout = function() {
+    console.log('Logging out...');
     localStorage.removeItem('current_user');
     window.location.href = 'login.html';
 };
