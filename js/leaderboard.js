@@ -42,6 +42,7 @@ function loadLeaderboardData() {
 function displayLeaderboard(data) {
     const tbody = document.getElementById('leaderboardBody');
     const filter = document.getElementById('leaderboardFilter').value;
+    const currentUser = getCurrentUser();
     
     if (!tbody) {
         console.error('Leaderboard table body not found!');
@@ -67,9 +68,9 @@ function displayLeaderboard(data) {
     if (filteredData.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="4" class="text-center py-4 text-muted">
-                    <i class="fas fa-trophy fa-2x mb-3"></i>
-                    <p>No scores yet. Complete quizzes and games to appear here!</p>
+                <td colspan="4" class="text-center py-4">
+                    <i class="fas fa-trophy fa-2x mb-3 text-muted"></i>
+                    <p class="text-muted">No scores yet. Complete quizzes and games to appear here!</p>
                 </td>
             </tr>
         `;
@@ -78,18 +79,28 @@ function displayLeaderboard(data) {
     
     filteredData.forEach((entry, index) => {
         const row = document.createElement('tr');
-        row.className = `leaderboard-item fade-in ${index < 3 ? `rank-${index + 1}` : ''}`;
+        
+        // Highlight current user's entries
+        const isCurrentUser = currentUser && entry.username === currentUser.username;
+        if (isCurrentUser) {
+            row.className = 'table-primary';
+            row.style.fontWeight = 'bold';
+        } else {
+            row.className = 'leaderboard-item';
+        }
         
         const activityType = entry.type === 'game' 
             ? `<span class="badge bg-success">Game: ${entry.game}</span>`
             : `<span class="badge bg-primary">Quiz: ${entry.quiz}</span>`;
         
         row.innerHTML = `
-            <td>
+            <td class="ps-4">
                 <div class="d-flex align-items-center">
-                    <span class="rank-badge ${index < 3 ? `rank-${index + 1}-badge` : ''}">${index + 1}</span>
+                    <span class="rank-badge me-3 ${index < 3 ? `rank-${index + 1}-badge` : 'text-muted'}">
+                        ${index + 1}
+                    </span>
                     <div>
-                        <div class="fw-bold">${entry.username}</div>
+                        <div class="fw-bold ${isCurrentUser ? 'text-primary' : ''}">${entry.username}</div>
                         <small class="text-muted">${activityType}</small>
                     </div>
                 </div>
@@ -98,13 +109,13 @@ function displayLeaderboard(data) {
                 <div class="score-display">
                     <span class="fw-bold ${getScoreColor(entry.percentage)}">${entry.percentage}%</span>
                     <div class="progress mt-1" style="height: 6px; width: 80px;">
-                        <div class="progress-bar ${getScoreColor(entry.percentage)}" 
+                        <div class="progress-bar ${getProgressBarColor(entry.percentage)}" 
                              style="width: ${entry.percentage}%"></div>
                     </div>
                 </div>
             </td>
-            <td>${entry.score}${entry.total ? `/${entry.total}` : ''}</td>
-            <td>${entry.date}</td>
+            <td class="fw-bold">${entry.score}${entry.total ? `/${entry.total}` : ''}</td>
+            <td class="text-muted">${entry.date}</td>
         `;
         
         tbody.appendChild(row);
@@ -114,6 +125,19 @@ function displayLeaderboard(data) {
     updateLeaderboardStats(filteredData);
 }
 
+function getProgressBarColor(percentage) {
+    if (percentage >= 90) return 'bg-success';
+    if (percentage >= 70) return 'bg-warning';
+    if (percentage >= 50) return 'bg-info';
+    return 'bg-danger';
+}
+
+function getScoreColor(percentage) {
+    if (percentage >= 90) return 'text-success';
+    if (percentage >= 70) return 'text-warning';
+    if (percentage >= 50) return 'text-info';
+    return 'text-danger';
+}
 function getScoreColor(percentage) {
     if (percentage >= 90) return 'text-success';
     if (percentage >= 70) return 'text-warning';
