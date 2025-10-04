@@ -1,266 +1,289 @@
-/* Custom CSS for CyberSafe Campus - Cybersecurity Theme */
+/* CyberSafe Campus - Enhanced Styles */
 
 :root {
-  --primary-color: #0d6efd;
-  --primary-dark: #0b5ed7;
-  --secondary-color: #6c757d;
-  --success-color: #198754;
-  --info-color: #0dcaf0;
-  --warning-color: #ffc107;
-  --danger-color: #dc3545;
-  --light-color: #f8f9fa;
-  --dark-color: #212529;
-  --cyber-blue: #00f5ff;
-  --cyber-purple: #8a2be2;
-  --cyber-green: #00ff41;
-  --cyber-dark: #0a0a0a;
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --light-bg: #f8f9fa;
+  --dark-bg: #2c3e50;
 }
 
-/* Global Styles */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f7fa;
-  color: #333;
-}
-
-/* Hero Section with Cybersecurity Background */
+/* Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, var(--cyber-dark) 0%, #1a1a2e 50%, #16213e 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 100px 0;
   position: relative;
   overflow: hidden;
 }
 
-.hero-section::before {
-  content: "";
+.min-vh-80 {
+  min-height: 80vh;
+}
+
+.hero-graphic {
+  position: relative;
+  height: 300px;
+}
+
+.hero-icon {
+  font-size: 12rem;
+  color: rgba(255, 255, 255, 0.1);
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-elements {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(0, 245, 255, 0.1) 0%, transparent 20%),
-    radial-gradient(circle at 80% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
-    radial-gradient(circle at 40% 80%, rgba(0, 255, 65, 0.05) 0%, transparent 20%);
-  z-index: 1;
+  right: 0;
+  bottom: 0;
 }
 
-.hero-section .container {
-  position: relative;
-  z-index: 2;
+.floating-elements i {
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.3);
+  animation: float 3s ease-in-out infinite;
 }
 
-/* Cybersecurity-themed Cards */
-.card {
-  border-radius: 10px;
-  transition: transform 0.3s, box-shadow 0.3s;
-  border: none;
+.floating-elements i:nth-child(1) {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0s;
 }
 
-.card:hover {
+.floating-elements i:nth-child(2) {
+  top: 60%;
+  right: 20%;
+  animation-delay: 1s;
+}
+
+.floating-elements i:nth-child(3) {
+  bottom: 20%;
+  left: 50%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Feature Cards */
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
 }
 
-.card-header {
-  border-radius: 10px 10px 0 0 !important;
-  font-weight: 600;
-}
-
-/* Lesson Cards */
-.lesson-card {
-  border-left: 4px solid var(--primary-color);
-}
-
-.lesson-card.completed {
-  border-left-color: var(--success-color);
-}
-
-/* Cybersecurity-themed Buttons */
-.btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
-}
-
-.btn-outline-primary {
-  border-radius: 6px;
-  font-weight: 500;
+/* About Graphic */
+.about-graphic {
+  font-size: 8rem;
+  color: var(--secondary-color);
 }
 
 /* Quiz Styles */
 .quiz-option {
   cursor: pointer;
-  transition: all 0.2s;
-  border-radius: 8px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .quiz-option:hover {
-  background-color: rgba(13, 110, 253, 0.05);
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.quiz-option.selected {
-  background-color: rgba(13, 110, 253, 0.1);
-  border-color: var(--primary-color);
+.quiz-option.active {
+  border-color: var(--secondary-color) !important;
 }
 
-.quiz-option.correct {
-  background-color: rgba(25, 135, 84, 0.1);
+.option-btn {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  background: white;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  border-color: var(--secondary-color);
+  background-color: #f8f9fa;
+}
+
+.option-btn.correct {
   border-color: var(--success-color);
+  background-color: #d4edda;
 }
 
-.quiz-option.incorrect {
-  background-color: rgba(220, 53, 69, 0.1);
-  border-color: var(--danger-color);
+.option-btn.incorrect {
+  border-color: var(--accent-color);
+  background-color: #f8d7da;
 }
 
-/* Progress Bars */
+/* Progress Bar */
 .progress {
   height: 10px;
   border-radius: 5px;
 }
 
 .progress-bar {
-  border-radius: 5px;
-  background: linear-gradient(90deg, var(--primary-color), var(--cyber-purple));
+  background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+  transition: width 0.5s ease;
 }
 
-/* Leaderboard Styles */
-.leaderboard-avatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--cyber-purple));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 24px;
-  margin: 0 auto;
+/* Leaderboard */
+.leaderboard-item {
+  transition: transform 0.2s ease;
 }
 
-.leaderboard-avatar-small {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--cyber-purple));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 16px;
+.leaderboard-item:hover {
+  transform: translateX(5px);
 }
 
-.winner-card {
-  transition: transform 0.3s;
-}
+.rank-1 { background: linear-gradient(45deg, #ffd700, #ffed4e); }
+.rank-2 { background: linear-gradient(45deg, #c0c0c0, #e0e0e0); }
+.rank-3 { background: linear-gradient(45deg, #cd7f32, #e59e6d); }
 
-.winner-card:hover {
-  transform: translateY(-5px);
-}
-
-/* Login Form Styles */
-.login-container {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-card {
+/* Game Styles */
+.game-container {
+  background: white;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   overflow: hidden;
 }
 
-.login-header {
-  background: linear-gradient(135deg, var(--cyber-dark) 0%, #1a1a2e 100%);
+.game-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
-  padding: 2rem;
-  text-align: center;
+  padding: 20px;
 }
 
-.login-body {
-  padding: 2rem;
+.email-game .email-item {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Cybersecurity Animation */
-@keyframes cyberGlow {
-  0% {
-    box-shadow: 0 0 5px var(--cyber-blue);
+.email-item.safe {
+  border-color: var(--success-color);
+  background-color: #d4edda;
+}
+
+.email-item.phishing {
+  border-color: var(--accent-color);
+  background-color: #f8d7da;
+}
+
+.email-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.password-strength-meter {
+  height: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+}
+
+.strength-weak { background: var(--accent-color); width: 25%; }
+.strength-medium { background: var(--warning-color); width: 50%; }
+.strength-strong { background: var(--success-color); width: 75%; }
+.strength-very-strong { background: var(--success-color); width: 100%; }
+
+/* Lesson Styles */
+.lesson-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lesson-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.lesson-completed {
+  border-left: 5px solid var(--success-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-icon {
+    font-size: 8rem;
   }
-  50% {
-    box-shadow: 0 0 20px var(--cyber-blue), 0 0 30px var(--cyber-purple);
+  
+  .about-graphic {
+    font-size: 5rem;
   }
-  100% {
-    box-shadow: 0 0 5px var(--cyber-blue);
+  
+  .display-4 {
+    font-size: 2.5rem;
   }
 }
 
-.cyber-glow {
-  animation: cyberGlow 3s infinite;
+/* Custom Utilities */
+.text-gradient {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Badge Styles */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Badge enhancements */
 .badge {
-  font-weight: 500;
+  font-size: 0.8em;
   padding: 0.5em 0.8em;
 }
 
-/* Table Styles */
-.table th {
-  border-top: none;
+/* Form enhancements */
+.form-check-input:checked {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+/* Button enhancements */
+.btn {
+  border-radius: 8px;
   font-weight: 600;
-  color: var(--dark-color);
+  transition: all 0.3s ease;
 }
 
-/* Cybersecurity Icons */
-.cyber-icon {
-  font-size: 1.5rem;
-  margin-right: 0.5rem;
+.btn-primary {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
 }
 
-/* Feature Icons */
-.feature-icon {
-  font-size: 3rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 2rem;
-  }
-  
-  .card {
-    margin-bottom: 1rem;
-  }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
+.btn-primary:hover {
   background: var(--primary-color);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
