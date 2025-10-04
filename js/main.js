@@ -1,130 +1,94 @@
-// main.js - Enhanced main functionality
+// main.js - Fixed for new authentication system
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
-  checkUserLoginStatus();
-  initializePageAnimations();
+    checkUserLoginStatus();
+    initializePageAnimations();
 });
 
-// Check if user is logged in
+// FIXED: Uses new authentication system
 function checkUserLoginStatus() {
-  const user = JSON.parse(localStorage.getItem('currentUser'));
-  const loginLink = document.getElementById('loginLink');
-  const userInfo = document.getElementById('userInfo');
-  const userName = document.getElementById('userName');
-  
-  if (user && loginLink && userInfo && userName) {
-    userName.textContent = user.username;
-    userInfo.classList.remove('d-none');
-    loginLink.classList.add('d-none');
-  }
+    const user = getCurrentUser();
+    const loginLink = document.getElementById('loginLink');
+    const userInfo = document.getElementById('userInfo');
+    const userName = document.getElementById('userName');
+    
+    if (user && loginLink && userInfo && userName) {
+        userName.textContent = user.username;
+        userInfo.classList.remove('d-none');
+        loginLink.classList.add('d-none');
+    }
 }
 
-// Logout function
+// FIXED: Uses new authentication system
+function getCurrentUser() {
+    try {
+        return JSON.parse(localStorage.getItem('current_user'));
+    } catch (error) {
+        return null;
+    }
+}
+
+// Logout function - FIXED for new system
 function logout() {
-  localStorage.removeItem('currentUser');
-  window.location.href = 'index.html';
+    localStorage.removeItem('current_user');
+    window.location.href = 'index.html';
 }
 
 // Initialize page animations
 function initializePageAnimations() {
-  // Add fade-in animation to cards
-  const cards = document.querySelectorAll('.card');
-  cards.forEach((card, index) => {
-    card.style.animationDelay = `${index * 0.1}s`;
-    card.classList.add('fade-in');
-  });
+    // Add fade-in animation to cards
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.classList.add('fade-in');
+    });
 }
 
-// Check if user is logged in (utility function)
+// FIXED: Uses new authentication system
 function isUserLoggedIn() {
-  return localStorage.getItem('currentUser') !== null;
+    return localStorage.getItem('current_user') !== null;
 }
 
-// Get current user (utility function)
+// FIXED: Uses new authentication system
 function getCurrentUser() {
-  return JSON.parse(localStorage.getItem('currentUser'));
-}
-
-// Save user progress
-function saveUserProgress(activity, score, total, type = 'quiz') {
-  const user = getCurrentUser();
-  if (!user) return false;
-  
-  const progress = JSON.parse(localStorage.getItem('userProgress')) || {};
-  const userProgress = progress[user.username] || { quizzes: [], games: [], lessons: [] };
-  
-  const newEntry = {
-    activity: activity,
-    score: score,
-    total: total,
-    percentage: Math.round((score / total) * 100),
-    date: new Date().toISOString(),
-    timestamp: new Date().getTime()
-  };
-  
-  if (type === 'quiz') {
-    userProgress.quizzes.push(newEntry);
-  } else if (type === 'game') {
-    userProgress.games.push(newEntry);
-  } else if (type === 'lesson') {
-    userProgress.lessons.push(newEntry);
-  }
-  
-  progress[user.username] = userProgress;
-  localStorage.setItem('userProgress', JSON.stringify(progress));
-  
-  return true;
-}
-
-// Get user progress
-function getUserProgress() {
-  const user = getCurrentUser();
-  if (!user) return null;
-  
-  const progress = JSON.parse(localStorage.getItem('userProgress')) || {};
-  return progress[user.username] || { quizzes: [], games: [], lessons: [] };
-}
-
-// Calculate overall progress percentage
-function calculateOverallProgress() {
-  const progress = getUserProgress();
-  if (!progress) return 0;
-  
-  const totalActivities = progress.quizzes.length + progress.games.length + progress.lessons.length;
-  if (totalActivities === 0) return 0;
-  
-  const totalScore = [
-    ...progress.quizzes,
-    ...progress.games,
-    ...progress.lessons
-  ].reduce((sum, activity) => sum + activity.percentage, 0);
-  
-  return Math.round(totalScore / totalActivities);
-}
-
-// Utility function to show notifications
-function showNotification(message, type = 'info') {
-  // Create notification element
-  const notification = document.createElement('div');
-  notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
-  notification.style.cssText = `
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-    min-width: 300px;
-  `;
-  notification.innerHTML = `
-    ${message}
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  `;
-  
-  document.body.appendChild(notification);
-  
-  // Auto remove after 5 seconds
-  setTimeout(() => {
-    if (notification.parentNode) {
-      notification.parentNode.removeChild(notification);
+    try {
+        return JSON.parse(localStorage.getItem('current_user'));
+    } catch (error) {
+        return null;
     }
-  }, 5000);
 }
+
+// Save user progress - FIXED for new system
+function saveUserProgress(activity, score, total, type = 'quiz') {
+    const user = getCurrentUser();
+    if (!user) return false;
+    
+    const progress = JSON.parse(localStorage.getItem('userProgress')) || {};
+    const userProgress = progress[user.username] || { quizzes: [], games: [], lessons: [] };
+    
+    const newEntry = {
+        activity: activity,
+        score: score,
+        total: total,
+        percentage: Math.round((score / total) * 100),
+        date: new Date().toISOString(),
+        timestamp: new Date().getTime()
+    };
+    
+    if (type === 'quiz') {
+        userProgress.quizzes.push(newEntry);
+    } else if (type === 'game') {
+        userProgress.games.push(newEntry);
+    } else if (type === 'lesson') {
+        userProgress.lessons.push(newEntry);
+    }
+    
+    progress[user.username] = userProgress;
+    localStorage.setItem('userProgress', JSON.stringify(progress));
+    
+    return true;
+}
+
+// Make logout globally available
+window.logout = logout;
