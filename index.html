@@ -1,340 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CyberSafe Campus - Cybersecurity Education Platform</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="CSS.css">
-</head>
-<body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <div class="logo-container">
-          <div class="logo-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <span class="logo-text">CyberSafe Campus</span>
-        </div>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="lessons.html">Lessons</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="games.html">Games</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="quiz.html">Quiz</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="leaderboard.html">Leaderboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.html" id="loginLink">Login</a>
-          </li>
-          <li class="nav-item d-none" id="userInfo">
-            <div class="dropdown">
-              <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
-                <i class="fas fa-user me-1"></i><span id="userName"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CyberSafe Campus - Learn, Play, and Stay Safe Online. Empowering students with cybersecurity awareness through lessons, games, and quizzes." />
+    <title>CyberSafe Campus</title>
 
-  <!-- Enhanced Hero Section -->
-  <section class="hero-section text-white">
-    <div class="container">
-      <div class="row align-items-center min-vh-100">
-        <div class="col-lg-6">
-          <div class="hero-content">
-            <h1 class="display-4 fw-bold mb-4">Master Cybersecurity & Protect Your Digital Life</h1>
-            <p class="lead mb-4">Join thousands of learners building essential cybersecurity skills through interactive lessons, engaging games, and real-world challenges. Stay safe in the digital world!</p>
-            <div class="d-flex gap-3 flex-wrap">
-              <a href="lessons.html" class="btn btn-light btn-lg px-4 py-3">
-                <i class="fas fa-play-circle me-2"></i>Start Learning Free
-              </a>
-              <a href="#features" class="btn btn-outline-light btn-lg px-4 py-3">
-                <i class="fas fa-info-circle me-2"></i>Learn More
-              </a>
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+      rel="stylesheet"
+    >
+
+    <!-- Custom CSS (make sure file name matches exactly!) -->
+    <link rel="stylesheet" href="css.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">CyberSafe Campus</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Lessons</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Games</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Quiz</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Leaderboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center text-white d-flex align-items-center justify-content-center">
+      <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Welcome to CyberSafe Campus</h1>
+        <p class="lead mb-4">Empowering Students with Cybersecurity Awareness</p>
+        <a href="#" class="btn btn-light btn-lg px-4">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-5">
+      <div class="container text-center">
+        <h2 class="fw-bold mb-4">Why Choose CyberSafe Campus?</h2>
+        <p class="lead text-muted mb-5">
+          Learn essential cybersecurity principles through interactive lessons, fun games, and practical quizzes — all designed to make online safety simple and engaging.
+        </p>
+
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">🎓 Interactive Learning</h5>
+                <p class="card-text text-muted">Understand cybersecurity basics in a simple and engaging way.</p>
+              </div>
             </div>
-            <div class="mt-4">
-              <div class="d-flex align-items-center text-warning">
-                <i class="fas fa-star me-1"></i>
-                <i class="fas fa-star me-1"></i>
-                <i class="fas fa-star me-1"></i>
-                <i class="fas fa-star me-1"></i>
-                <i class="fas fa-star me-1"></i>
-                <span class="text-white ms-2">Rated 4.9/5 by 2,500+ students</span>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">🎮 Fun Games</h5>
+                <p class="card-text text-muted">Reinforce what you learn through interactive cybersecurity games.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">🏆 Challenge Yourself</h5>
+                <p class="card-text text-muted">Test your knowledge with quizzes and climb the leaderboard!</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6 text-center">
-          <!-- Cybersecurity Graphic -->
-          <div class="cyber-graphic">
-            <div class="cyber-shield">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <div class="protection-rings">
-              <div class="ring ring-1"></div>
-              <div class="ring ring-2"></div>
-              <div class="ring ring-3"></div>
-            </div>
-            <div class="security-elements">
-              <div class="element el-1"><i class="fas fa-lock"></i></div>
-              <div class="element el-2"><i class="fas fa-key"></i></div>
-              <div class="element el-3"><i class="fas fa-fingerprint"></i></div>
-              <div class="element el-4"><i class="fas fa-user-shield"></i></div>
-            </div>
-            <div class="floating-dots">
-              <div class="dot dot-1"></div>
-              <div class="dot dot-2"></div>
-              <div class="dot dot-3"></div>
-              <div class="dot dot-4"></div>
-              <div class="dot dot-5"></div>
-              <div class="dot dot-6"></div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-    <div class="wave-divider">
-      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
-        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
-        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
-      </svg>
-    </div>
-  </section>
+    </section>
 
-  <!-- Features Section -->
-  <section id="features" class="py-5 bg-light">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col">
-          <h2 class="fw-bold display-5 mb-3">Why Choose CyberSafe Campus?</h2>
-          <p class="lead text-muted">Comprehensive cybersecurity education for the digital age</p>
-        </div>
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white py-3">
+      <div class="container">
+        <p class="mb-0">&copy; 2025 CyberSafe Campus. All Rights Reserved.</p>
       </div>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm feature-card">
-            <div class="card-body text-center p-4">
-              <div class="feature-icon mb-3">
-                <i class="fas fa-graduation-cap"></i>
-              </div>
-              <h5>Expert-Crafted Lessons</h5>
-              <p class="text-muted">Learn from cybersecurity professionals with years of industry experience. Our curriculum is constantly updated with the latest threats and protection techniques.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm feature-card">
-            <div class="card-body text-center p-4">
-              <div class="feature-icon mb-3">
-                <i class="fas fa-gamepad"></i>
-              </div>
-              <h5>Interactive Learning</h5>
-              <p class="text-muted">Reinforce your knowledge with engaging games, simulations, and real-world scenarios. Learning cybersecurity has never been this fun and effective.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm feature-card">
-            <div class="card-body text-center p-4">
-              <div class="feature-icon mb-3">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <h5>Track Your Progress</h5>
-              <p class="text-muted">Monitor your learning journey, earn achievements, and compete on the leaderboard. Watch your cybersecurity skills grow with every lesson completed.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- Stats Section -->
-  <section class="py-5 bg-primary text-white">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-3 mb-4">
-          <div class="stat-item">
-            <h3 class="fw-bold display-4">8+</h3>
-            <p class="mb-0">Cybersecurity Topics</p>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4">
-          <div class="stat-item">
-            <h3 class="fw-bold display-4">75+</h3>
-            <p class="mb-0">Learning Questions</p>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4">
-          <div class="stat-item">
-            <h3 class="fw-bold display-4">5+</h3>
-            <p class="mb-0">Interactive Games</p>
-          </div>
-        </div>
-        <div class="col-md-3 mb-4">
-          <div class="stat-item">
-            <h3 class="fw-bold display-4">100%</h3>
-            <p class="mb-0">Free Access</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Learning Path Section -->
-  <section class="py-5">
-    <div class="container">
-      <div class="row text-center mb-5">
-        <div class="col">
-          <h2 class="fw-bold display-5 mb-3">Comprehensive Learning Path</h2>
-          <p class="lead text-muted">Master cybersecurity from basics to advanced topics</p>
-        </div>
-      </div>
-      <div class="row g-4">
-        <div class="col-lg-3 col-md-6">
-          <div class="learning-path-card">
-            <div class="path-icon">
-              <i class="fas fa-key"></i>
-            </div>
-            <h5>Password Security</h5>
-            <p>Learn to create uncrackable passwords and manage them securely across all your accounts.</p>
-            <span class="badge bg-primary">Beginner</span>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="learning-path-card">
-            <div class="path-icon">
-              <i class="fas fa-fish"></i>
-            </div>
-            <h5>Phishing Defense</h5>
-            <p>Identify and avoid sophisticated phishing attempts targeting your personal information.</p>
-            <span class="badge bg-warning">Essential</span>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="learning-path-card">
-            <div class="path-icon">
-              <i class="fas fa-shield-virus"></i>
-            </div>
-            <h5>Malware Protection</h5>
-            <p>Understand different malware types and protect your devices from digital threats.</p>
-            <span class="badge bg-danger">Critical</span>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="learning-path-card">
-            <div class="path-icon">
-              <i class="fas fa-users"></i>
-            </div>
-            <h5>Social Engineering</h5>
-            <p>Recognize and defend against psychological manipulation tactics used by attackers.</p>
-            <span class="badge bg-info">Advanced</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-5 bg-gradient-primary text-white">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-8">
-          <h2 class="fw-bold display-6 mb-3">Ready to Become Cyber Safe?</h2>
-          <p class="lead mb-4">Join thousands of students who have already taken control of their digital security. Start your cybersecurity journey today!</p>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <a href="login.html" class="btn btn-light btn-lg px-5 py-3">
-            <i class="fas fa-user-plus me-2"></i>Get Started Free
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-dark text-white py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 mb-4">
-          <div class="logo-container footer-logo">
-            <div class="logo-icon">
-              <i class="fas fa-shield-alt"></i>
-            </div>
-            <span class="logo-text">CyberSafe Campus</span>
-          </div>
-          <p class="text-light mt-3">Empowering individuals with essential cybersecurity knowledge through interactive learning and practical skills.</p>
-          <div class="social-links">
-            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="text-light me-3"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div class="col-lg-2 col-6 mb-4">
-          <h6>Learn</h6>
-          <ul class="list-unstyled">
-            <li><a href="lessons.html" class="text-light text-decoration-none">Lessons</a></li>
-            <li><a href="games.html" class="text-light text-decoration-none">Games</a></li>
-            <li><a href="quiz.html" class="text-light text-decoration-none">Quizzes</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-6 mb-4">
-          <h6>Compete</h6>
-          <ul class="list-unstyled">
-            <li><a href="leaderboard.html" class="text-light text-decoration-none">Leaderboard</a></li>
-            <li><a href="quiz.html" class="text-light text-decoration-none">Take Quiz</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-6 mb-4">
-          <h6>Support</h6>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-light text-decoration-none">Help Center</a></li>
-            <li><a href="#" class="text-light text-decoration-none">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-6 mb-4">
-          <h6>Legal</h6>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-light text-decoration-none">Privacy</a></li>
-            <li><a href="#" class="text-light text-decoration-none">Terms</a></li>
-          </ul>
-        </div>
-      </div>
-      <hr class="bg-light">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <p class="mb-0">&copy; 2025 CyberSafe Campus. All rights reserved.</p>
-        </div>
-        <div class="col-md-6 text-md-end">
-          <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> for a safer digital world</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js"></script>
-</body>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
