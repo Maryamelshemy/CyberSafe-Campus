@@ -1,4 +1,33 @@
-/* Enhanced Main Page Styles */
+/* CyberSafe Campus - Complete Enhanced Styles */
+
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --light-bg: #f8f9fa;
+  --dark-bg: #2c3e50;
+  --purple-color: #6f42c1;
+  --orange-color: #fd7e14;
+  --dark-color: #343a40;
+}
+
+/* Enhanced Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.min-vh-80 {
+  min-height: 80vh;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
 
 /* Fixed Navigation */
 .navbar.fixed-top {
@@ -6,7 +35,11 @@
   background-color: rgba(44, 62, 80, 0.95) !important;
 }
 
-/* Enhanced Hero Section */
+.mt-5 {
+  margin-top: 5rem !important;
+}
+
+/* Enhanced Hero Animations */
 .hero-animation {
   position: relative;
   height: 400px;
@@ -66,6 +99,16 @@
   fill: #FFFFFF;
 }
 
+/* Feature Cards */
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
 /* Feature Icons */
 .feature-icon {
   width: 80px;
@@ -78,6 +121,176 @@
   justify-content: center;
   font-size: 2rem;
   color: white;
+}
+
+/* About Graphic */
+.about-graphic {
+  font-size: 8rem;
+  color: var(--secondary-color);
+}
+
+/* Quiz Styles */
+.quiz-option {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.quiz-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.quiz-option.active {
+  border-color: var(--secondary-color) !important;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  background: white;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  border-color: var(--secondary-color);
+  background-color: #f8f9fa;
+}
+
+.option-btn.correct {
+  border-color: var(--success-color);
+  background-color: #d4edda;
+}
+
+.option-btn.incorrect {
+  border-color: var(--accent-color);
+  background-color: #f8d7da;
+}
+
+/* Progress Bar */
+.progress {
+  height: 10px;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+  transition: width 0.5s ease;
+}
+
+/* Leaderboard */
+.leaderboard-item {
+  transition: transform 0.2s ease;
+}
+
+.leaderboard-item:hover {
+  transform: translateX(5px);
+}
+
+.rank-1 { background: linear-gradient(45deg, #ffd700, #ffed4e); }
+.rank-2 { background: linear-gradient(45deg, #c0c0c0, #e0e0e0); }
+.rank-3 { background: linear-gradient(45deg, #cd7f32, #e59e6d); }
+
+/* Game Styles */
+.game-container {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.game-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 20px;
+}
+
+.email-game .email-item {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.email-item.safe {
+  border-color: var(--success-color);
+  background-color: #d4edda;
+}
+
+.email-item.phishing {
+  border-color: var(--accent-color);
+  background-color: #f8d7da;
+}
+
+.email-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.password-strength-meter {
+  height: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+}
+
+.strength-weak { background: var(--accent-color); width: 25%; }
+.strength-medium { background: var(--warning-color); width: 50%; }
+.strength-strong { background: var(--success-color); width: 75%; }
+.strength-very-strong { background: var(--success-color); width: 100%; }
+
+/* Lesson Styles */
+.lesson-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lesson-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.lesson-completed {
+  border-left: 5px solid var(--success-color);
+}
+
+/* Enhanced Lesson Content */
+.lesson-content h6 {
+  color: var(--primary-color);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-content ul {
+  padding-left: 1.5rem;
+}
+
+.lesson-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.lesson-content li strong {
+  color: var(--primary-color);
+}
+
+/* Practice Exercise Styling */
+.practice-exercise {
+  border-left: 4px solid var(--secondary-color);
+  background-color: #f8f9fa !important;
+}
+
+.practice-exercise h6 {
+  color: var(--primary-color);
 }
 
 /* Stats Section */
@@ -133,9 +346,54 @@
   line-height: 1.6;
 }
 
+/* Tip Cards */
+.tip-card {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+}
+
 /* Gradient Background */
 .bg-gradient-primary {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+}
+
+/* New Badge Colors */
+.bg-purple {
+  background-color: var(--purple-color) !important;
+}
+
+.bg-orange {
+  background-color: var(--orange-color) !important;
+}
+
+.bg-dark {
+  background-color: var(--dark-color) !important;
+}
+
+/* Alert Color Extensions */
+.alert-purple {
+  background-color: #e2dcf7;
+  border-color: var(--purple-color);
+  color: var(--purple-color);
+}
+
+.alert-orange {
+  background-color: #ffe8d6;
+  border-color: var(--orange-color);
+  color: var(--orange-color);
+}
+
+.alert-dark {
+  background-color: #e2e3e5;
+  border-color: var(--dark-color);
+  color: var(--dark-color);
 }
 
 /* Enhanced Animations */
@@ -159,8 +417,12 @@
   color: var(--secondary-color) !important;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
+  .hero-icon {
+    font-size: 8rem;
+  }
+  
   .floating-shield {
     font-size: 8rem;
   }
@@ -171,6 +433,10 @@
   
   .hero-animation {
     height: 300px;
+  }
+  
+  .about-graphic {
+    font-size: 5rem;
   }
   
   .display-4 {
@@ -184,33 +450,102 @@
   .display-6 {
     font-size: 1.8rem;
   }
+
+  .lesson-content {
+    font-size: 0.9rem;
+  }
+  
+  .lesson-content h5 {
+    font-size: 1.2rem;
+  }
+  
+  .lesson-content h6 {
+    font-size: 1.1rem;
+  }
 }
 
-/* Button Enhancements */
+/* Custom Utilities */
+.text-gradient {
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Button enhancements */
 .btn {
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: 600;
   transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .btn-lg {
   padding: 0.75rem 2rem;
 }
 
-/* Card Hover Effects */
-.feature-card {
-  transition: all 0.3s ease;
+/* Form enhancements */
+.form-check-input:checked {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
 }
 
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+/* Badge enhancements */
+.badge {
+  font-size: 0.8em;
+  padding: 0.5em 0.8em;
 }
 
-/* Text Gradients */
-.text-gradient {
-  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating Elements for Hero */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.floating-elements i {
+  position: absolute;
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-elements i:nth-child(1) {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.floating-elements i:nth-child(2) {
+  top: 60%;
+  right: 20%;
+  animation-delay: 1s;
+}
+
+.floating-elements i:nth-child(3) {
+  bottom: 20%;
+  left: 50%;
+  animation-delay: 2s;
 }
