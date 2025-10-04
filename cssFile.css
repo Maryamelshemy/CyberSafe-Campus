@@ -218,3 +218,217 @@
 .progress-bar.text-warning { background-color: #ffc107 !important; }
 .progress-bar.text-info { background-color: #17a2b8 !important; }
 .progress-bar.text-danger { background-color: #dc3545 !important; }
+/* Cybersecurity Graphic Styles */
+.cyber-graphic {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.cyber-shield {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3.5rem;
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(52, 152, 219, 0.6);
+  animation: shield-pulse 3s ease-in-out infinite;
+}
+
+.protection-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ring {
+  position: absolute;
+  border: 2px solid;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring-rotate 20s linear infinite;
+}
+
+.ring-1 {
+  width: 200px;
+  height: 200px;
+  border-color: rgba(52, 152, 219, 0.6);
+  animation-duration: 15s;
+}
+
+.ring-2 {
+  width: 280px;
+  height: 280px;
+  border-color: rgba(44, 62, 80, 0.4);
+  animation-duration: 20s;
+  animation-direction: reverse;
+}
+
+.ring-3 {
+  width: 360px;
+  height: 360px;
+  border-color: rgba(231, 76, 60, 0.3);
+  animation-duration: 25s;
+}
+
+.security-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.element {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+  backdrop-filter: blur(10px);
+  animation: element-float 6s ease-in-out infinite;
+}
+
+.el-1 {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.el-2 {
+  top: 20%;
+  right: 20%;
+  animation-delay: 1.5s;
+}
+
+.el-3 {
+  bottom: 30%;
+  left: 15%;
+  animation-delay: 3s;
+}
+
+.el-4 {
+  bottom: 20%;
+  right: 25%;
+  animation-delay: 4.5s;
+}
+
+.floating-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #27ae60;
+  border-radius: 50%;
+  animation: dot-blink 2s ease-in-out infinite;
+}
+
+.dot-1 { top: 15%; left: 50%; animation-delay: 0s; }
+.dot-2 { top: 50%; right: 15%; animation-delay: 0.3s; }
+.dot-3 { bottom: 15%; left: 50%; animation-delay: 0.6s; }
+.dot-4 { top: 50%; left: 15%; animation-delay: 0.9s; }
+.dot-5 { top: 35%; right: 35%; animation-delay: 1.2s; }
+.dot-6 { bottom: 35%; left: 35%; animation-delay: 1.5s; }
+
+/* Animations */
+@keyframes shield-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 40px rgba(52, 152, 219, 0.6);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 60px rgba(52, 152, 219, 0.8);
+  }
+}
+
+@keyframes ring-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes element-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+}
+
+@keyframes dot-blink {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+    box-shadow: 0 0 15px #27ae60;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cyber-graphic {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .cyber-shield {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
+  
+  .ring-1 {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .ring-2 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .ring-3 {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .element {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
