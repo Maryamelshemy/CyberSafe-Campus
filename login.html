@@ -18,12 +18,13 @@
     </div>
   </nav>
 
-  <!-- Login Section -->
-  <section class="min-vh-80 d-flex align-items-center">
+  <!-- Login/Register Section -->
+  <section class="min-vh-100 d-flex align-items-center">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-          <div class="card shadow border-0">
+          <!-- Login Form -->
+          <div class="card shadow border-0" id="loginFormContainer">
             <div class="card-header bg-primary text-white text-center py-4">
               <h3 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Welcome Back</h3>
               <p class="mb-0 mt-2">Sign in to continue learning</p>
@@ -61,11 +62,68 @@
             </div>
           </div>
 
+          <!-- Register Form (Hidden by default) -->
+          <div class="card shadow border-0 d-none" id="registerFormContainer">
+            <div class="card-header bg-success text-white text-center py-4">
+              <h3 class="mb-0"><i class="fas fa-user-plus me-2"></i>Create Account</h3>
+              <p class="mb-0 mt-2">Join CyberSafe Campus today</p>
+            </div>
+            <div class="card-body p-4">
+              <form id="registerForm">
+                <div class="mb-3">
+                  <label for="regUsername" class="form-label">Choose Username</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <input type="text" class="form-control" id="regUsername" placeholder="Choose a username" required>
+                  </div>
+                  <div class="form-text">Username must be 3-20 characters long</div>
+                </div>
+                <div class="mb-3">
+                  <label for="regEmail" class="form-label">Email Address</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input type="email" class="form-control" id="regEmail" placeholder="Enter your email" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="regPassword" class="form-label">Create Password</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="regPassword" placeholder="Create a password" required>
+                  </div>
+                  <div class="form-text">Password must be at least 6 characters long</div>
+                </div>
+                <div class="mb-3">
+                  <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" id="regConfirmPassword" placeholder="Confirm your password" required>
+                  </div>
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="acceptTerms" required>
+                  <label class="form-check-label" for="acceptTerms">
+                    I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                  </label>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-user-plus me-2"></i>Create Account
+                  </button>
+                </div>
+              </form>
+              
+              <div class="text-center mt-4">
+                <p class="mb-0">Already have an account? <a href="#" id="showLogin">Sign in here</a></p>
+              </div>
+            </div>
+          </div>
+
           <!-- Demo Accounts -->
           <div class="card mt-4 border-0 bg-warning bg-opacity-10">
             <div class="card-body">
               <h6 class="card-title"><i class="fas fa-info-circle me-2"></i>Demo Accounts</h6>
-              <p class="small mb-2">Use these for testing:</p>
+              <p class="small mb-2">Use these for testing (or register new account):</p>
               <div class="row">
                 <div class="col-6">
                   <p class="small mb-1"><strong>Username:</strong> student1</p>
