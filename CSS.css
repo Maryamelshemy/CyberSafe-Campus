@@ -19,6 +19,8 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
+  color: #333333; /* Default text color */
+  background-color: #ffffff;
 }
 
 /* ===== NAVIGATION ===== */
@@ -74,17 +76,20 @@ body {
   align-items: center;
 }
 
+.hero-section * {
+  color: #ffffff !important; /* Force white text in hero section */
+}
+
 .hero-content h1 {
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-  color: #ffffff;
 }
 
 .hero-content .lead {
   font-size: 1.3rem;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.9);
+  opacity: 0.9;
 }
 
 .hero-buttons {
@@ -247,6 +252,10 @@ body {
   padding: 4rem 0;
 }
 
+.bg-primary * {
+  color: #ffffff !important;
+}
+
 .stat-item {
   padding: 2rem 1rem;
   text-align: center;
@@ -255,12 +264,11 @@ body {
 .stat-item h3 {
   font-size: 3.5rem;
   font-weight: 700;
-  color: #ffffff;
   margin-bottom: 0.5rem;
 }
 
 .stat-item p {
-  color: rgba(255, 255, 255, 0.9);
+  opacity: 0.9;
   margin: 0;
   font-size: 1.1rem;
 }
@@ -318,19 +326,26 @@ body {
   color: #ffffff;
 }
 
+.bg-gradient-primary * {
+  color: #ffffff !important;
+}
+
 .bg-gradient-primary h2 {
-  color: #ffffff;
   margin-bottom: 1rem;
 }
 
 .bg-gradient-primary .lead {
-  color: rgba(255, 255, 255, 0.9);
+  opacity: 0.9;
 }
 
 /* ===== FOOTER ===== */
 .bg-dark {
   background: #343a40 !important;
   padding: 3rem 0 2rem;
+}
+
+.bg-dark * {
+  color: #ffffff !important;
 }
 
 .footer-logo {
@@ -345,11 +360,9 @@ body {
 
 .footer-logo .logo-text {
   font-size: 1.1rem;
-  color: #ffffff;
 }
 
 .social-links a {
-  color: #ffffff;
   font-size: 1.2rem;
   margin-right: 1rem;
   transition: all 0.3s ease;
@@ -358,7 +371,7 @@ body {
 
 .social-links a:hover {
   transform: translateY(-3px);
-  color: var(--secondary-color);
+  color: var(--secondary-color) !important;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -535,31 +548,26 @@ body {
   border-radius: 10px;
   transition: width 0.5s ease;
 }
+
 /* Fix Leaderboard Text Visibility */
 .leaderboard-item {
-    color: #333333 !important;
-    opacity: 1 !important;
+    color: #333333;
 }
 
 .table-hover tbody tr:hover {
-    color: #333333 !important;
-    background-color: rgba(0, 0, 0, 0.075) !important;
+    background-color: rgba(0, 0, 0, 0.075);
 }
 
 .table td, .table th {
-    color: #333333 !important;
-    opacity: 1 !important;
-    border-color: #dee2e6 !important;
+    border-color: #dee2e6;
 }
 
 .card-body, .card-header, .card-title {
-    color: #333333 !important;
-    opacity: 1 !important;
+    color: #333333;
 }
 
 .text-muted {
-    color: #6c757d !important;
-    opacity: 1 !important;
+    color: #6c757d;
 }
 
 /* Fix rank badges */
@@ -571,78 +579,48 @@ body {
 }
 
 .rank-1-badge {
-    color: #ffd700 !important; /* Gold */
+    color: #ffd700;
 }
 
 .rank-2-badge {
-    color: #c0c0c0 !important; /* Silver */
+    color: #c0c0c0;
 }
 
 .rank-3-badge {
-    color: #cd7f32 !important; /* Bronze */
+    color: #cd7f32;
 }
 
 /* Fix progress bars */
 .progress {
-    background-color: #e9ecef !important;
-    opacity: 1 !important;
-}
-
-.progress-bar {
-    opacity: 1 !important;
-}
-
-/* Fix all text elements */
-body, h1, h2, h3, h4, h5, h6, p, span, div, a, label, th, td, li, small, strong {
-    color: #333333 !important;
-    opacity: 1 !important;
-}
-
-/* Fix specific elements */
-.hero-section .lead,
-.hero-section h1,
-.hero-section p {
-    color: #ffffff !important;
-    opacity: 1 !important;
-}
-
-.bg-light {
-    background-color: #f8f9fa !important;
-}
-
-.bg-light * {
-    color: #333333 !important;
-    opacity: 1 !important;
-}
-
-/* Fix table headers */
-.bg-light th {
-    background-color: #f8f9fa !important;
-    color: #333333 !important;
-    opacity: 1 !important;
-}
-
-/* Fix badges */
-.badge {
-    opacity: 1 !important;
-}
-
-.badge.bg-primary {
-    background-color: #007bff !important;
-    color: white !important;
-}
-
-.badge.bg-success {
-    background-color: #28a745 !important;
-    color: white !important;
+    background-color: #e9ecef;
 }
 
 /* Fix navigation text */
 .navbar-dark .navbar-nav .nav-link {
-    color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
-    color: #ffffff !important;
+    color: #ffffff;
+}
+
+/* Fix white backgrounds */
+.bg-light {
+    background-color: #f8f9fa;
+}
+
+.bg-light *:not(.btn):not(.badge):not(.navbar-dark *) {
+    color: #333333;
+}
+
+/* Fix badges */
+.badge.bg-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.badge.bg-success {
+    background-color: #28a745;
+    color: white;
 }
