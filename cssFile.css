@@ -13,7 +13,6 @@
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
   padding: 120px 0 80px 0;
-  color: #ffffff !important;
   position: relative;
   overflow: hidden;
 }
@@ -411,21 +410,4 @@
 .social-links a:hover {
   transform: translateY(-3px);
   color: var(--secondary-color) !important;
-}
-
-/* ===== UTILITY CLASSES ===== */
-.text-gradient {
-  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
