@@ -1,26 +1,59 @@
-// auth.js - Enhanced authentication system
+// auth.js - Complete authentication system with registration
 
 document.addEventListener('DOMContentLoaded', function() {
   initializeAuth();
 });
 
 function initializeAuth() {
+  // Initialize users in localStorage if not exists
+  if (!localStorage.getItem('users')) {
+    const defaultUsers = [
+      { id: 1, username: 'student1', email: 'student1@example.com', password: 'password123', points: 0, completedLessons: [], createdAt: new Date().toISOString() },
+      { id: 2, username: 'demo', email: 'demo@example.com', password: 'demo', points: 0, completedLessons: [], createdAt: new Date().toISOString() }
+    ];
+    localStorage.setItem('users', JSON.stringify(defaultUsers));
+  }
+
+  // Form event listeners
   const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
   const showRegister = document.getElementById('showRegister');
-  
+  const showLogin = document.getElementById('showLogin');
+
   if (loginForm) {
     loginForm.addEventListener('submit', handleLogin);
   }
-  
+
+  if (registerForm) {
+    registerForm.addEventListener('submit', handleRegister);
+  }
+
   if (showRegister) {
     showRegister.addEventListener('click', function(e) {
       e.preventDefault();
-      handleRegister();
+      showRegisterForm();
     });
   }
-  
+
+  if (showLogin) {
+    showLogin.addEventListener('click', function(e) {
+      e.preventDefault();
+      showLoginForm();
+    });
+  }
+
   // Check if user is already logged in
   checkExistingLogin();
+}
+
+function showRegisterForm() {
+  document.getElementById('loginFormContainer').classList.add('d-none');
+  document.getElementById('registerFormContainer').classList.remove('d-none');
+}
+
+function showLoginForm() {
+  document.getElementById('registerFormContainer').classList.add('d-none');
+  document.getElementById('loginFormContainer').classList.remove('d-none');
 }
 
 function handleLogin(e) {
@@ -28,7 +61,6 @@ function handleLogin(e) {
   
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
-  const rememberMe = document.getElementById('rememberMe')?.checked;
   
   // Simple validation
   if (!username || !password) {
@@ -36,55 +68,131 @@ function handleLogin(e) {
     return;
   }
   
-  // Check credentials (in real app, this would be a server call)
-  if (validateCredentials(username, password)) {
-    // Create user session
-    const user = {
-      username: username,
-      loginTime: new Date().toISOString(),
-      rememberMe: rememberMe
+  // Check credentials
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(u => u.username === username && u.password === password);
+  
+  if (user) {
+    // Create user session (without password)
+    const userSession = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      points: user.points,
+      loginTime: new Date().toISOString()
     };
     
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('currentUser', JSON.stringify(userSession));
     
     showAuthMessage('Login successful! Redirecting...', 'success');
     
     // Redirect to home page after short delay
     setTimeout(() => {
-      window.location.href = 'index.html';
+      const redirectUrl = getRedirectUrl() || 'index.html';
+      window.location.href = redirectUrl;
     }, 1000);
   } else {
     showAuthMessage('Invalid username or password', 'error');
   }
 }
 
-function validateCredentials(username, password) {
-  // Demo accounts - in real app, this would be a server-side check
-  const demoAccounts = [
-    { username: 'student1', password: 'password123' },
-    { username: 'demo', password: 'demo' },
-    { username: 'test', password: 'test' },
-    { username: 'admin', password: 'admin123' }
-  ];
+function handleRegister(e) {
+  e.preventDefault();
   
-  return demoAccounts.some(account => 
-    account.username === username && account.password === password
-  );
+  const username = document.getElementById('regUsername').value;
+  const email = document.getElementById('regEmail').value;
+  const password = document.getElementById('regPassword').value;
+  const confirmPassword = document.getElementById('regConfirmPassword').value;
+  const acceptTerms = document.getElementById('acceptTerms').checked;
+  
+  // Validation
+  if (!username || !email || !password || !confirmPassword) {
+    showAuthMessage('Please fill in all fields', 'error');
+    return;
+  }
+  
+  if (username.length < 3 || username.length > 20) {
+    showAuthMessage('Username must be between 3-20 characters', 'error');
+    return;
+  }
+  
+  if (password.length < 6) {
+    showAuthMessage('Password must be at least 6 characters long', 'error');
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    showAuthMessage('Passwords do not match', 'error');
+    return;
+  }
+  
+  if (!acceptTerms) {
+    showAuthMessage('Please accept the terms and conditions', 'error');
+    return;
+  }
+  
+  // Check if username or email already exists
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const existingUser = users.find(u => u.username === username || u.email === email);
+  
+  if (existingUser) {
+    if (existingUser.username === username) {
+      showAuthMessage('Username already exists', 'error');
+    } else {
+      showAuthMessage('Email already registered', 'error');
+    }
+    return;
+  }
+  
+  // Create new user
+  const newUser = {
+    id: generateUserId(),
+    username: username,
+    email: email,
+    password: password,
+    points: 0,
+    completedLessons: [],
+    createdAt: new Date().toISOString()
+  };
+  
+  users.push(newUser);
+  localStorage.setItem('users', JSON.stringify(users));
+  
+  // Auto-login after registration
+  const userSession = {
+    id: newUser.id,
+    username: newUser.username,
+    email: newUser.email,
+    points: newUser.points,
+    loginTime: new Date().toISOString()
+  };
+  
+  localStorage.setItem('currentUser', JSON.stringify(userSession));
+  
+  showAuthMessage('Account created successfully! Redirecting...', 'success');
+  
+  // Redirect to home page after short delay
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 1500);
 }
 
-function handleRegister() {
-  // Simple registration for demo purposes
-  const username = prompt('Enter a username for registration (demo purposes):');
-  if (username) {
-    showAuthMessage(`Account '${username}' created! You can now login with any password.`, 'success');
-  }
+function generateUserId() {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  return users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+}
+
+function getRedirectUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('redirect');
 }
 
 function checkExistingLogin() {
   const user = JSON.parse(localStorage.getItem('currentUser'));
   if (user && window.location.pathname.includes('login.html')) {
     // If already logged in and on login page, redirect to home
-    window.location.href = 'index.html';
+    const redirectUrl = getRedirectUrl() || 'index.html';
+    window.location.href = redirectUrl;
   }
 }
 
@@ -103,9 +211,14 @@ function showAuthMessage(message, type) {
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   `;
   
-  const form = document.getElementById('loginForm');
-  if (form) {
-    form.appendChild(alertDiv);
+  // Find the current active form
+  const loginForm = document.getElementById('loginForm');
+  const registerForm = document.getElementById('registerForm');
+  
+  if (loginForm && !loginForm.closest('.d-none')) {
+    loginForm.appendChild(alertDiv);
+  } else if (registerForm && !registerForm.closest('.d-none')) {
+    registerForm.appendChild(alertDiv);
   }
   
   // Auto remove after 5 seconds
@@ -121,3 +234,13 @@ window.logout = function() {
   localStorage.removeItem('currentUser');
   window.location.href = 'index.html';
 };
+
+// Utility function to check if user is logged in
+function isUserLoggedIn() {
+  return localStorage.getItem('currentUser') !== null;
+}
+
+// Utility function to get current user
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem('currentUser'));
+}
