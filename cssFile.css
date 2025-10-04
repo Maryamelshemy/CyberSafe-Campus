@@ -1,4 +1,4 @@
-/* CyberSafe Campus - Complete Enhanced Styles */
+/* CyberSafe Campus - Complete Enhanced Styles with Logo */
 
 :root {
   --primary-color: #2c3e50;
@@ -11,6 +11,140 @@
   --purple-color: #6f42c1;
   --orange-color: #fd7e14;
   --dark-color: #343a40;
+}
+
+/* Enhanced Logo Styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.logo-pulse {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, #fff, #e3f2fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated Main Logo */
+.main-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.animated-logo {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-core {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.5rem;
+  z-index: 3;
+  position: relative;
+  animation: rotate 10s linear infinite;
+}
+
+.logo-ring {
+  position: absolute;
+  border: 2px solid;
+  border-radius: 50%;
+  animation: pulse-ring 3s ease-out infinite;
+}
+
+.logo-ring-1 {
+  width: 100px;
+  height: 100px;
+  border-color: var(--secondary-color);
+  animation-delay: 0s;
+}
+
+.logo-ring-2 {
+  width: 120px;
+  height: 120px;
+  border-color: var(--primary-color);
+  animation-delay: 1s;
+}
+
+.logo-ring-3 {
+  width: 140px;
+  height: 140px;
+  border-color: var(--accent-color);
+  animation-delay: 2s;
+}
+
+/* Logo Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Enhanced Hero Section */
@@ -46,6 +180,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.cyber-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-move 20s linear infinite;
 }
 
 .floating-shield {
@@ -406,6 +553,15 @@
   }
 }
 
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
 /* Social Links */
 .social-links a {
   transition: all 0.3s ease;
@@ -415,6 +571,22 @@
 .social-links a:hover {
   transform: translateY(-3px);
   color: var(--secondary-color) !important;
+}
+
+/* Login Logo */
+.login-logo {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Footer Logo */
+.footer-logo .logo-icon {
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+}
+
+.footer-logo .logo-text {
+  font-size: 1.1rem;
 }
 
 /* Responsive */
@@ -461,6 +633,27 @@
   
   .lesson-content h6 {
     font-size: 1.1rem;
+  }
+  
+  .logo-core {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .logo-ring-1 {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .logo-ring-2 {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .logo-ring-3 {
+    width: 120px;
+    height: 120px;
   }
 }
 
@@ -514,38 +707,4 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* Floating Elements for Hero */
-.floating-elements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.floating-elements i {
-  position: absolute;
-  font-size: 2rem;
-  color: rgba(255, 255, 255, 0.3);
-  animation: float 3s ease-in-out infinite;
-}
-
-.floating-elements i:nth-child(1) {
-  top: 20%;
-  left: 20%;
-  animation-delay: 0s;
-}
-
-.floating-elements i:nth-child(2) {
-  top: 60%;
-  right: 20%;
-  animation-delay: 1s;
-}
-
-.floating-elements i:nth-child(3) {
-  bottom: 20%;
-  left: 50%;
-  animation-delay: 2s;
 }
