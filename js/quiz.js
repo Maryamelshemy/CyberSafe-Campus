@@ -1,4 +1,4 @@
-// js/quiz.js - Quiz functionality for your HTML structure
+// quiz.js - Fixed for new authentication system
 
 let currentQuiz = null;
 let currentQuestionIndex = 0;
@@ -9,11 +9,11 @@ let timeLeft = 0;
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Quiz system initialized');
-    initializeQuizSelection();
+    initializeQuizButtons();
     checkUserLoginStatus();
 });
 
-function initializeQuizSelection() {
+function initializeQuizButtons() {
     // Quiz type selection
     const quizOptions = document.querySelectorAll('.quiz-option');
     quizOptions.forEach(option => {
@@ -277,14 +277,14 @@ function getScoreMessage(percentage) {
     return 'Keep studying! Cybersecurity is an important skill to master. Score recorded.';
 }
 
+// FIXED: Uses new authentication system
 function isUserLoggedIn() {
-    // Check if user is logged in (you'll need to implement this based on your auth system)
-    return localStorage.getItem('currentUser') !== null;
+    return localStorage.getItem('current_user') !== null;
 }
 
 function checkUserLoginStatus() {
-    // Update UI based on login status
-    const user = JSON.parse(localStorage.getItem('currentUser'));
+    // Update UI based on login status using new system
+    const user = getCurrentUser();
     if (user) {
         document.getElementById('userName').textContent = user.username;
         document.getElementById('userInfo').classList.remove('d-none');
@@ -292,8 +292,18 @@ function checkUserLoginStatus() {
     }
 }
 
+// FIXED: Uses new authentication system
+function getCurrentUser() {
+    try {
+        return JSON.parse(localStorage.getItem('current_user'));
+    } catch (error) {
+        return null;
+    }
+}
+
+// FIXED: Uses new user database system
 function saveScoreToLeaderboard(score, percentage, quizName) {
-    const user = JSON.parse(localStorage.getItem('currentUser'));
+    const user = getCurrentUser();
     if (!user) return;
     
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
@@ -304,36 +314,43 @@ function saveScoreToLeaderboard(score, percentage, quizName) {
         percentage: percentage,
         quiz: quizName,
         date: new Date().toLocaleDateString(),
-        timestamp: new Date().getTime()
+        timestamp: new Date().getTime(),
+        type: 'quiz'
     };
     
     leaderboard.push(newEntry);
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    
+    // Also update user's points in the database
+    updateUserPoints(user.id, score * 10); // 10 points per correct answer
 }
 
-// Add this CSS to your CSS.css file for better styling
-const additionalCSS = `
-.quiz-option {
-    cursor: pointer;
-    transition: all 0.3s ease;
+// FIXED: Updates user points in new database system
+function updateUserPoints(userId, pointsToAdd) {
+    const users = JSON.parse(localStorage.getItem('cybersafe_users')) || [];
+    const userIndex = users.findIndex(u => u.id === userId);
+    
+    if (userIndex !== -1) {
+        if (!users[userIndex].points) {
+            users[userIndex].points = 0;
+        }
+        users[userIndex].points += pointsToAdd;
+        
+        // Update completed quizzes
+        if (!users[userIndex].completedQuizzes) {
+            users[userIndex].completedQuizzes = [];
+        }
+        if (currentQuiz && !users[userIndex].completedQuizzes.includes(currentQuiz.id)) {
+            users[userIndex].completedQuizzes.push(currentQuiz.id);
+        }
+        
+        localStorage.setItem('cybersafe_users', JSON.stringify(users));
+        
+        // Update current session
+        const currentSession = getCurrentUser();
+        if (currentSession) {
+            currentSession.points = users[userIndex].points;
+            localStorage.setItem('current_user', JSON.stringify(currentSession));
+        }
+    }
 }
-
-.quiz-option:hover {
-    transform: translateY(-2px);
-}
-
-.quiz-option.active {
-    border: 2px solid #007bff !important;
-}
-
-.form-check-input:checked {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
-.progress-bar {
-    transition: width 0.3s ease;
-}
-`;
-
-console.log('Add this CSS to your CSS.css file for better quiz styling:', additionalCSS);
