@@ -1,164 +1,123 @@
-// Authentication JavaScript
+// auth.js - Enhanced authentication system
 
 document.addEventListener('DOMContentLoaded', function() {
+  initializeAuth();
+});
+
+function initializeAuth() {
   const loginForm = document.getElementById('loginForm');
-  const registerForm = document.getElementById('registerForm');
-  const registerLink = document.getElementById('registerLink');
-  const loginLinkForm = document.getElementById('loginLinkForm');
+  const showRegister = document.getElementById('showRegister');
   
   if (loginForm) {
     loginForm.addEventListener('submit', handleLogin);
   }
   
-  if (registerForm) {
-    registerForm.addEventListener('submit', handleRegistration);
+  if (showRegister) {
+    showRegister.addEventListener('click', function(e) {
+      e.preventDefault();
+      handleRegister();
+    });
   }
   
-  if (registerLink) {
-    registerLink.addEventListener('click', showRegistration);
-  }
-  
-  if (loginLinkForm) {
-    loginLinkForm.addEventListener('click', showLogin);
-  }
-});
+  // Check if user is already logged in
+  checkExistingLogin();
+}
 
-// Handle login form submission
 function handleLogin(e) {
   e.preventDefault();
   
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
+  const rememberMe = document.getElementById('rememberMe')?.checked;
   
   // Simple validation
   if (!username || !password) {
-    showNotification('Please fill in all fields', 'danger');
+    showAuthMessage('Please fill in all fields', 'error');
     return;
   }
   
-  // Check if user exists
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  const user = users.find(u => u.username === username && u.password === password);
-  
-  if (user) {
-    // Store current user in localStorage
-    localStorage.setItem('currentUser', JSON.stringify({
-      id: user.id,
-      username: user.username,
-      loginTime: new Date().toISOString()
-    }));
+  // Check credentials (in real app, this would be a server call)
+  if (validateCredentials(username, password)) {
+    // Create user session
+    const user = {
+      username: username,
+      loginTime: new Date().toISOString(),
+      rememberMe: rememberMe
+    };
     
-    showNotification('Login successful!', 'success');
+    localStorage.setItem('currentUser', JSON.stringify(user));
     
-    // Redirect to home page after a short delay
+    showAuthMessage('Login successful! Redirecting...', 'success');
+    
+    // Redirect to home page after short delay
     setTimeout(() => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const redirect = urlParams.get('redirect');
-      window.location.href = redirect || 'index.html';
+      window.location.href = 'index.html';
     }, 1000);
   } else {
-    showNotification('Invalid username or password', 'danger');
+    showAuthMessage('Invalid username or password', 'error');
   }
 }
 
-// Handle registration form submission
-function handleRegistration(e) {
-  e.preventDefault();
+function validateCredentials(username, password) {
+  // Demo accounts - in real app, this would be a server-side check
+  const demoAccounts = [
+    { username: 'student1', password: 'password123' },
+    { username: 'demo', password: 'demo' },
+    { username: 'test', password: 'test' },
+    { username: 'admin', password: 'admin123' }
+  ];
   
-  const username = document.getElementById('regUsername').value;
-  const password = document.getElementById('regPassword').value;
-  const email = document.getElementById('regEmail').value;
-  
-  // Simple validation
-  if (!username || !password || !email) {
-    showNotification('Please fill in all fields', 'danger');
-    return;
-  }
-  
-  if (username.length < 3) {
-    showNotification('Username must be at least 3 characters long', 'warning');
-    return;
-  }
-  
-  if (password.length < 6) {
-    showNotification('Password must be at least 6 characters long', 'warning');
-    return;
-  }
-  
-  // Check if username already exists
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  if (users.find(u => u.username === username)) {
-    showNotification('Username already exists', 'warning');
-    return;
-  }
-  
-  // Create new user
-  const newUser = {
-    id: Date.now().toString(),
-    username: username,
-    password: password,
-    email: email,
-    registrationDate: new Date().toISOString(),
-    completedLessons: [],
-    quizzes: [],
-    points: 0
-  };
-  
-  users.push(newUser);
-  localStorage.setItem('users', JSON.stringify(users));
-  
-  showNotification('Registration successful! Please log in.', 'success');
-  
-  // Switch back to login form
-  showLogin();
+  return demoAccounts.some(account => 
+    account.username === username && account.password === password
+  );
 }
 
-// Show registration form
-function showRegistration(e) {
-  if (e) e.preventDefault();
-  
-  document.getElementById('loginForm').classList.add('d-none');
-  document.getElementById('registerForm').classList.remove('d-none');
+function handleRegister() {
+  // Simple registration for demo purposes
+  const username = prompt('Enter a username for registration (demo purposes):');
+  if (username) {
+    showAuthMessage(`Account '${username}' created! You can now login with any password.`, 'success');
+  }
 }
 
-// Show login form
-function showLogin(e) {
-  if (e) e.preventDefault();
-  
-  document.getElementById('registerForm').classList.add('d-none');
-  document.getElementById('loginForm').classList.remove('d-none');
+function checkExistingLogin() {
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+  if (user && window.location.pathname.includes('login.html')) {
+    // If already logged in and on login page, redirect to home
+    window.location.href = 'index.html';
+  }
 }
 
-// Notification system
-function showNotification(message, type) {
-  // Create toast notification
-  const toast = document.createElement('div');
-  toast.className = 'position-fixed bottom-0 end-0 p-3';
-  toast.style.zIndex = '11';
+function showAuthMessage(message, type) {
+  // Remove any existing messages
+  const existingAlert = document.querySelector('.auth-alert');
+  if (existingAlert) {
+    existingAlert.remove();
+  }
   
-  const alertClass = type === 'success' ? 'alert-success' : 
-                    type === 'warning' ? 'alert-warning' : 
-                    type === 'danger' ? 'alert-danger' : 'alert-info';
-  
-  toast.innerHTML = `
-    <div class="toast show" role="alert">
-      <div class="toast-header">
-        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : type === 'danger' ? 'times-circle' : 'info-circle'} text-${type} me-2"></i>
-        <strong class="me-auto">${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-      </div>
-      <div class="toast-body">
-        ${message}
-      </div>
-    </div>
+  // Create new alert
+  const alertDiv = document.createElement('div');
+  alertDiv.className = `alert alert-${type === 'error' ? 'danger' : 'success'} auth-alert alert-dismissible fade show mt-3`;
+  alertDiv.innerHTML = `
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   `;
   
-  document.body.appendChild(toast);
+  const form = document.getElementById('loginForm');
+  if (form) {
+    form.appendChild(alertDiv);
+  }
   
-  // Remove toast after 3 seconds
+  // Auto remove after 5 seconds
   setTimeout(() => {
-    if (document.body.contains(toast)) {
-      document.body.removeChild(toast);
+    if (alertDiv.parentNode) {
+      alertDiv.remove();
     }
-  }, 3000);
+  }, 5000);
 }
+
+// Make functions globally available
+window.logout = function() {
+  localStorage.removeItem('currentUser');
+  window.location.href = 'index.html';
+};
