@@ -214,6 +214,55 @@ body {
 .el-3 { bottom: 30%; left: 15%; }
 .el-4 { bottom: 20%; right: 25%; }
 
+.floating-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 3s infinite ease-in-out;
+}
+
+.dot-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.dot-2 { top: 80%; left: 20%; animation-delay: 0.5s; }
+.dot-3 { top: 30%; right: 15%; animation-delay: 1s; }
+.dot-4 { bottom: 20%; left: 30%; animation-delay: 1.5s; }
+.dot-5 { top: 60%; right: 25%; animation-delay: 2s; }
+.dot-6 { bottom: 40%; right: 10%; animation-delay: 2.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.wave-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 100px;
+}
+
+.wave-divider .shape-fill {
+  fill: #FFFFFF;
+}
+
 /* ===== FEATURES SECTION ===== */
 #features {
   padding: 5rem 0;
@@ -497,6 +546,7 @@ body {
 .bg-warning { background: var(--warning-color) !important; color: #000 !important; }
 .bg-danger { background: var(--accent-color) !important; }
 .bg-info { background: var(--secondary-color) !important; }
+.bg-purple { background: #6f42c1 !important; }
 
 /* ===== FORM STYLES ===== */
 .form-control {
@@ -547,6 +597,59 @@ body {
   background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
   border-radius: 10px;
   transition: width 0.5s ease;
+}
+
+/* ===== GAME STYLES ===== */
+.game-container {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.game-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.game-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+}
+
+/* ===== INTERACTIVE LESSON STYLES ===== */
+.interactive-lesson-img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  height: 200px;
+  object-fit: cover;
+}
+
+.lesson-gif {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin: 15px auto;
+  display: block;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.game-gif {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  margin: 15px auto;
+  display: block;
 }
 
 /* Fix Leaderboard Text Visibility */
@@ -623,4 +726,31 @@ body {
 .badge.bg-success {
     background-color: #28a745;
     color: white;
+}
+
+/* Tip cards */
+.tip-card {
+  padding: 1.5rem;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  height: 100%;
+}
+
+/* Practice exercise */
+.practice-exercise {
+  border-left: 4px solid var(--secondary-color);
+}
+
+/* Alert variations */
+.alert-purple {
+  background-color: #e2e3ff;
+  border-color: #6f42c1;
+  color: #6f42c1;
+}
+
+.alert-orange {
+  background-color: #fff3cd;
+  border-color: #fd7e14;
+  color: #856404;
 }
