@@ -1,5 +1,4 @@
-// lessons.js - Enhanced with new authentication compatibility
-
+// lessons.js - Enhanced with interactive elements and images
 document.addEventListener('DOMContentLoaded', function() {
     updateUserStatus();
     initializeLessons();
@@ -28,15 +27,26 @@ function initializeLessons() {
             const markCompleteBtn = lessonCard.querySelector('.mark-complete');
             
             if (content.classList.contains('d-none')) {
-                // Show content
-                content.classList.remove('d-none');
+                // Show content with animation
+                content.style.display = 'block';
+                setTimeout(() => {
+                    content.classList.remove('d-none');
+                    content.style.opacity = '1';
+                }, 10);
                 if (markCompleteBtn) markCompleteBtn.classList.remove('d-none');
                 this.textContent = 'Show Less';
+                this.classList.add('btn-primary');
+                this.classList.remove('btn-outline-primary');
             } else {
-                // Hide content
-                content.classList.add('d-none');
-                if (markCompleteBtn) markCompleteBtn.classList.add('d-none');
+                // Hide content with animation
+                content.style.opacity = '0';
+                setTimeout(() => {
+                    content.classList.add('d-none');
+                    if (markCompleteBtn) markCompleteBtn.classList.add('d-none');
+                }, 300);
                 this.textContent = 'Learn More';
+                this.classList.remove('btn-primary');
+                this.classList.add('btn-outline-primary');
             }
         });
     });
@@ -48,6 +58,20 @@ function initializeLessons() {
             const lessonCard = this.closest('.lesson-card');
             const lessonId = lessonCard.id;
             markLessonComplete(lessonId);
+        });
+    });
+    
+    // Add hover effects to lesson cards
+    const lessonCards = document.querySelectorAll('.lesson-card');
+    lessonCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
         });
     });
 }
@@ -81,6 +105,7 @@ function updateLessonProgress() {
     const progressBar = document.getElementById('lessonsProgressBar') || document.getElementById('overallProgress');
     if (progressBar) {
         progressBar.style.width = `${progressPercentage}%`;
+        progressBar.textContent = `${Math.round(progressPercentage)}%`;
     }
     
     // Update completed count
@@ -150,8 +175,62 @@ function markLessonComplete(lessonId) {
         
         // Update progress
         updateLessonProgress();
+        
+        // Add celebration effect
+        celebrateCompletion(lessonId);
     } else {
         showNotification('This lesson is already marked as complete.', 'info');
+    }
+}
+
+function celebrateCompletion(lessonId) {
+    const lessonCard = document.getElementById(lessonId);
+    if (lessonCard) {
+        // Add celebration animation
+        lessonCard.style.transition = 'all 0.5s ease';
+        lessonCard.style.boxShadow = '0 0 20px rgba(40, 167, 69, 0.5)';
+        
+        // Create confetti effect
+        createConfetti(lessonCard);
+        
+        // Reset shadow after animation
+        setTimeout(() => {
+            lessonCard.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+        }, 2000);
+    }
+}
+
+function createConfetti(element) {
+    const colors = ['#28a745', '#20c997', '#17a2b8', '#6f42c1', '#e83e8c'];
+    const confettiCount = 30;
+    
+    for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = '8px';
+        confetti.style.height = '8px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = '50%';
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = '0';
+        confetti.style.opacity = '0';
+        confetti.style.zIndex = '1000';
+        
+        element.appendChild(confetti);
+        
+        // Animate confetti
+        const animation = confetti.animate([
+            { opacity: 0, transform: 'translateY(0) rotate(0deg)' },
+            { opacity: 1, transform: `translateY(${Math.random() * 100 + 50}px) rotate(${Math.random() * 360}deg)` },
+            { opacity: 0, transform: `translateY(${Math.random() * 100 + 150}px) rotate(${Math.random() * 720}deg)` }
+        ], {
+            duration: 1000 + Math.random() * 1000,
+            easing: 'cubic-bezier(0.1, 0.8, 0.2, 1)'
+        });
+        
+        animation.onfinish = () => {
+            confetti.remove();
+        };
     }
 }
 
@@ -193,6 +272,9 @@ function updateLessonUI(lessonId, fromLoad = false) {
         
         if (badge) {
             badge.style.display = 'inline-block';
+            if (!fromLoad) {
+                badge.style.animation = 'pulse 1s ease-in-out';
+            }
         }
         
         // Add completed styling
@@ -203,8 +285,18 @@ function updateLessonUI(lessonId, fromLoad = false) {
             const toggleBtn = lessonCard.querySelector('.lesson-toggle');
             const completeBtn = lessonCard.querySelector('.mark-complete');
             
-            if (toggleBtn) toggleBtn.classList.add('d-none');
-            if (completeBtn) completeBtn.classList.add('d-none');
+            if (toggleBtn) {
+                toggleBtn.style.display = 'none';
+            }
+            if (completeBtn) {
+                completeBtn.style.display = 'none';
+            }
+        }
+        
+        // Update lesson status icon
+        const statusIcon = lessonCard.querySelector('.lesson-status i');
+        if (statusIcon) {
+            statusIcon.className = 'fas fa-check-circle text-success fa-2x';
         }
     }
 }
@@ -217,10 +309,10 @@ function showCompletionMessage(message) {
     
     toast.innerHTML = `
         <div class="toast show" role="alert">
-            <div class="toast-header">
-                <i class="fas fa-check-circle text-success me-2"></i>
+            <div class="toast-header bg-success text-white">
+                <i class="fas fa-check-circle me-2"></i>
                 <strong class="me-auto">Success</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
             </div>
             <div class="toast-body">
                 ${message}
@@ -255,10 +347,10 @@ function showNotification(message, type = 'info') {
     
     toast.innerHTML = `
         <div class="toast show" role="alert">
-            <div class="toast-header ${alertClass}">
+            <div class="toast-header ${alertClass} text-white">
                 <i class="fas fa-${iconClass} me-2"></i>
                 <strong class="me-auto">${type.charAt(0).toUpperCase() + type.slice(1)}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
             </div>
             <div class="toast-body">
                 ${message}
@@ -303,6 +395,29 @@ function updateUserStatus() {
         if (loginLink) loginLink.classList.remove('d-none');
     }
 }
+
+// Add CSS for animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    .lesson-content {
+        transition: opacity 0.3s ease;
+    }
+    
+    .lesson-card {
+        transition: all 0.3s ease;
+    }
+    
+    .completed-badge {
+        animation: pulse 1s ease-in-out;
+    }
+`;
+document.head.appendChild(style);
 
 // Make functions globally available
 window.markLessonComplete = markLessonComplete;
