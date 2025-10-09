@@ -13,7 +13,12 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <i class="fas fa-shield-alt me-2"></i>CyberSafe Campus
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <span class="logo-text">CyberSafe Campus</span>
+        </div>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -41,10 +46,10 @@
           <li class="nav-item d-none" id="userInfo">
             <div class="dropdown">
               <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown">
-                Welcome, <span id="userName"></span>
+                <i class="fas fa-user me-1"></i><span id="userName"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
+                <li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
               </ul>
             </div>
           </li>
@@ -58,8 +63,8 @@
     <div class="container">
       <div class="row">
         <div class="col text-center">
-          <h1 class="display-5 fw-bold">Learning Games</h1>
-          <p class="lead">Learn cybersecurity through interactive games and challenges</p>
+          <h1 class="display-5 fw-bold">Interactive Learning Games</h1>
+          <p class="lead">Learn cybersecurity through fun, interactive games and challenges</p>
         </div>
       </div>
     </div>
@@ -70,10 +75,13 @@
     <div class="container">
       <div class="row g-4">
         <!-- Phishing Spotter Game -->
-        <div class="col-lg-6">
+        <div class="col-lg-4 col-md-6">
           <div class="card h-100 border-0 shadow game-container">
             <div class="game-header">
               <h3 class="mb-0"><i class="fas fa-fish me-2"></i>Phishing Spotter</h3>
+            </div>
+            <div class="game-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+              <i class="fas fa-fish"></i>
             </div>
             <div class="card-body p-4">
               <p class="text-muted mb-4">Identify phishing emails from legitimate ones. Test your ability to spot suspicious messages!</p>
@@ -88,11 +96,14 @@
           </div>
         </div>
 
-        <!-- Password Strength Game -->
-        <div class="col-lg-6">
+        <!-- Password Defender Game -->
+        <div class="col-lg-4 col-md-6">
           <div class="card h-100 border-0 shadow game-container">
             <div class="game-header">
               <h3 class="mb-0"><i class="fas fa-key me-2"></i>Password Defender</h3>
+            </div>
+            <div class="game-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1598974357801-cbca100e65d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+              <i class="fas fa-key"></i>
             </div>
             <div class="card-body p-4">
               <p class="text-muted mb-4">Learn what makes passwords strong or weak. Create and analyze password security!</p>
@@ -101,6 +112,94 @@
                 <span class="badge bg-warning text-dark"><i class="fas fa-star me-1"></i>Easy</span>
               </div>
               <button class="btn btn-primary w-100" onclick="startPasswordGame()">
+                <i class="fas fa-play me-2"></i>Start Game
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Malware Hunter Game -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow game-container">
+            <div class="game-header">
+              <h3 class="mb-0"><i class="fas fa-shield-virus me-2"></i>Malware Hunter</h3>
+            </div>
+            <div class="game-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+              <i class="fas fa-shield-virus"></i>
+            </div>
+            <div class="card-body p-4">
+              <p class="text-muted mb-4">Identify different types of malware and learn how to protect your devices from digital threats.</p>
+              <div class="game-info mb-4">
+                <span class="badge bg-primary me-2"><i class="fas fa-clock me-1"></i>5-7 min</span>
+                <span class="badge bg-danger"><i class="fas fa-star me-1"></i>Intermediate</span>
+              </div>
+              <button class="btn btn-primary w-100" onclick="startMalwareGame()">
+                <i class="fas fa-play me-2"></i>Start Game
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Engineering Challenge -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow game-container">
+            <div class="game-header">
+              <h3 class="mb-0"><i class="fas fa-users me-2"></i>Social Engineering Challenge</h3>
+            </div>
+            <div class="game-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1551836026-d5c88ac5d691?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="card-body p-4">
+              <p class="text-muted mb-4">Learn to recognize and defend against social engineering tactics used by attackers.</p>
+              <div class="game-info mb-4">
+                <span class="badge bg-primary me-2"><i class="fas fa-clock me-1"></i>7-10 min</span>
+                <span class="badge bg-info"><i class="fas fa-star me-1"></i>Advanced</span>
+              </div>
+              <button class="btn btn-primary w-100" onclick="startSocialGame()">
+                <i class="fas fa-play me-2"></i>Start Game
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Network Defender -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow game-container">
+            <div class="game-header">
+              <h3 class="mb-0"><i class="fas fa-network-wired me-2"></i>Network Defender</h3>
+            </div>
+            <div class="game-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <div class="card-body p-4">
+              <p class="text-muted mb-4">Protect your network from intruders and learn about firewalls, VPNs, and secure connections.</p>
+              <div class="game-info mb-4">
+                <span class="badge bg-primary me-2"><i class="fas fa-clock me-1"></i>8-12 min</span>
+                <span class="badge bg-danger"><i class="fas fa-star me-1"></i>Intermediate</span>
+              </div>
+              <button class="btn btn-primary w-100" onclick="startNetworkGame()">
+                <i class="fas fa-play me-2"></i>Start Game
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Privacy Challenge -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card h-100 border-0 shadow game-container">
+            <div class="game-header">
+              <h3 class="mb-0"><i class="fas fa-user-secret me-2"></i>Data Privacy Challenge</h3>
+            </div>
+            <div class="game-image" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+              <i class="fas fa-user-secret"></i>
+            </div>
+            <div class="card-body p-4">
+              <p class="text-muted mb-4">Learn how to protect your personal information online and understand privacy settings.</p>
+              <div class="game-info mb-4">
+                <span class="badge bg-primary me-2"><i class="fas fa-clock me-1"></i>5-8 min</span>
+                <span class="badge bg-success"><i class="fas fa-star me-1"></i>Beginner</span>
+              </div>
+              <button class="btn btn-primary w-100" onclick="startPrivacyGame()">
                 <i class="fas fa-play me-2"></i>Start Game
               </button>
             </div>
