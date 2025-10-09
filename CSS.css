@@ -754,3 +754,70 @@ body {
   border-color: #fd7e14;
   color: #856404;
 }
+/* Add this to your existing CSS.css file */
+
+/* Educational Video Styles */
+.educational-video {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.educational-video h6 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.ratio-16x9 {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Enhanced lesson content styles */
+.lesson-content {
+    transition: all 0.3s ease;
+}
+
+.lesson-content ul {
+    margin-left: 20px;
+}
+
+.lesson-content li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Improved image styles */
+.interactive-lesson-img {
+    width: 100%;
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Enhanced game styles */
+.game-gif {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 15px auto;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Additional responsive improvements */
+@media (max-width: 768px) {
+    .educational-video {
+        margin: 15px 0;
+        padding: 10px;
+    }
+    
+    .interactive-lesson-img {
+        height: 150px;
+    }
+}
