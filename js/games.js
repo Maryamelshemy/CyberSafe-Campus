@@ -1,10 +1,10 @@
-// games.js - Complete games functionality
+// games.js - Enhanced with 6 interactive games
 let currentGame = null;
 let gameScore = 0;
 let currentRound = 0;
 const totalRounds = 3;
 
-// Phishing game data
+// Enhanced game data with images/GIFs
 const phishingEmails = [
     {
         id: 1,
@@ -12,7 +12,8 @@ const phishingEmails = [
         sender: "security@yourbank.com",
         content: "Dear customer, we detected suspicious activity on your account. Click here to verify your identity immediately or your account will be suspended within 24 hours.",
         isPhishing: true,
-        clues: ["Creates false urgency", "Generic greeting", "Suspicious link"]
+        clues: ["Creates false urgency", "Generic greeting", "Suspicious link"],
+        image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     },
     {
         id: 2,
@@ -20,47 +21,86 @@ const phishingEmails = [
         sender: "newsletter@microsoft.com",
         content: "Hello, here's our latest security updates and best practices for keeping your systems secure. This is a regular educational newsletter.",
         isPhishing: false,
-        clues: ["Educational content", "No urgent action required", "Legitimate sender"]
-    },
-    {
-        id: 3,
-        subject: "Package Delivery Failed",
-        sender: "noreply@ups-delivery.com",
-        content: "We attempted to deliver your package but failed. Click this link to reschedule delivery and pay the $2.50 redelivery fee.",
-        isPhishing: true,
-        clues: ["Unexpected delivery notice", "Requests payment", "Suspicious sender address"]
+        clues: ["Educational content", "No urgent action required", "Legitimate sender"],
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     }
 ];
 
-// Password strength examples
 const passwordExamples = [
     {
         password: "password123",
         strength: "Very Weak",
-        reason: "Common word with sequential numbers"
+        reason: "Common word with sequential numbers",
+        image: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     },
     {
         password: "P@ssw0rd!",
         strength: "Weak", 
-        reason: "Common pattern with simple substitutions"
+        reason: "Common pattern with simple substitutions",
+        image: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+    }
+];
+
+const malwareExamples = [
+    {
+        type: "Ransomware",
+        description: "Encrypts your files and demands payment to restore access",
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        protection: "Regular backups and updated antivirus"
     },
     {
-        password: "MyDogSpot2024!",
-        strength: "Medium",
-        reason: "Longer but uses personal information"
+        type: "Trojan Horse",
+        description: "Disguised as legitimate software but contains malicious code",
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        protection: "Download software only from official sources"
+    }
+];
+
+const socialEngineeringScenarios = [
+    {
+        scenario: "A caller claims to be from IT support asking for your password",
+        isDangerous: true,
+        image: "https://images.unsplash.com/photo-1551836026-d5c88ac5d691?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     },
     {
-        password: "C0rrectH0rseB@tterySt@ple!",
-        strength: "Strong",
-        reason: "Long passphrase with mixed characters"
+        scenario: "A colleague asks for help with a work project",
+        isDangerous: false,
+        image: "https://images.unsplash.com/photo-1551836026-d5c88ac5d691?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+    }
+];
+
+const networkScenarios = [
+    {
+        scenario: "Public Wi-Fi without VPN protection",
+        isSecure: false,
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+    },
+    {
+        scenario: "Home network with WPA3 encryption",
+        isSecure: true,
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+    }
+];
+
+const privacyScenarios = [
+    {
+        scenario: "Sharing location data with all apps",
+        isPrivate: false,
+        image: "https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+    },
+    {
+        scenario: "Using privacy-focused browser with tracking protection",
+        isPrivate: true,
+        image: "https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
     }
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Games system initialized');
+    console.log('Enhanced games system initialized');
     checkUserLoginStatus();
 });
 
+// Game initialization functions
 function startPhishingGame() {
     if (!isUserLoggedIn()) {
         alert('Please log in to play games and save your progress!');
@@ -72,7 +112,6 @@ function startPhishingGame() {
     gameScore = 0;
     currentRound = 0;
     
-    // Show game interface
     document.querySelector('section.py-5').classList.add('d-none');
     document.getElementById('gameInterface').classList.remove('d-none');
     
@@ -96,13 +135,82 @@ function startPasswordGame() {
     loadPasswordRound();
 }
 
+function startMalwareGame() {
+    if (!isUserLoggedIn()) {
+        alert('Please log in to play games and save your progress!');
+        window.location.href = 'login.html?redirect=games.html';
+        return;
+    }
+
+    currentGame = 'malware';
+    gameScore = 0;
+    currentRound = 0;
+    
+    document.querySelector('section.py-5').classList.add('d-none');
+    document.getElementById('gameInterface').classList.remove('d-none');
+    
+    loadMalwareRound();
+}
+
+function startSocialGame() {
+    if (!isUserLoggedIn()) {
+        alert('Please log in to play games and save your progress!');
+        window.location.href = 'login.html?redirect=games.html';
+        return;
+    }
+
+    currentGame = 'social';
+    gameScore = 0;
+    currentRound = 0;
+    
+    document.querySelector('section.py-5').classList.add('d-none');
+    document.getElementById('gameInterface').classList.remove('d-none');
+    
+    loadSocialRound();
+}
+
+function startNetworkGame() {
+    if (!isUserLoggedIn()) {
+        alert('Please log in to play games and save your progress!');
+        window.location.href = 'login.html?redirect=games.html';
+        return;
+    }
+
+    currentGame = 'network';
+    gameScore = 0;
+    currentRound = 0;
+    
+    document.querySelector('section.py-5').classList.add('d-none');
+    document.getElementById('gameInterface').classList.remove('d-none');
+    
+    loadNetworkRound();
+}
+
+function startPrivacyGame() {
+    if (!isUserLoggedIn()) {
+        alert('Please log in to play games and save your progress!');
+        window.location.href = 'login.html?redirect=games.html';
+        return;
+    }
+
+    currentGame = 'privacy';
+    gameScore = 0;
+    currentRound = 0;
+    
+    document.querySelector('section.py-5').classList.add('d-none');
+    document.getElementById('gameInterface').classList.remove('d-none');
+    
+    loadPrivacyRound();
+}
+
+// Game round loading functions
 function loadPhishingRound() {
     if (currentRound >= totalRounds) {
         endGame();
         return;
     }
 
-    const email = phishingEmails[currentRound];
+    const email = phishingEmails[currentRound % phishingEmails.length];
     const gameContainer = document.getElementById('gameContainer');
     
     gameContainer.innerHTML = `
@@ -110,6 +218,10 @@ function loadPhishingRound() {
             <h3>Phishing Spotter - Round ${currentRound + 1}/${totalRounds}</h3>
             <p>Is this email legitimate or a phishing attempt?</p>
             <div class="score-display">Score: ${gameScore}</div>
+        </div>
+        
+        <div class="text-center mb-4">
+            <img src="${email.image}" alt="Email example" class="game-gif rounded">
         </div>
         
         <div class="email-preview card mb-4">
@@ -139,7 +251,7 @@ function loadPasswordRound() {
         return;
     }
 
-    const password = passwordExamples[currentRound];
+    const password = passwordExamples[currentRound % passwordExamples.length];
     const gameContainer = document.getElementById('gameContainer');
     
     gameContainer.innerHTML = `
@@ -147,6 +259,10 @@ function loadPasswordRound() {
             <h3>Password Defender - Round ${currentRound + 1}/${totalRounds}</h3>
             <p>Rate the strength of this password:</p>
             <div class="score-display">Score: ${gameScore}</div>
+        </div>
+        
+        <div class="text-center mb-4">
+            <img src="${password.image}" alt="Password security" class="game-gif rounded">
         </div>
         
         <div class="password-example card mb-4">
@@ -172,8 +288,158 @@ function loadPasswordRound() {
     `;
 }
 
+function loadMalwareRound() {
+    if (currentRound >= totalRounds) {
+        endGame();
+        return;
+    }
+
+    const malware = malwareExamples[currentRound % malwareExamples.length];
+    const gameContainer = document.getElementById('gameContainer');
+    
+    gameContainer.innerHTML = `
+        <div class="game-header text-center mb-4">
+            <h3>Malware Hunter - Round ${currentRound + 1}/${totalRounds}</h3>
+            <p>Identify the malware type and protection method:</p>
+            <div class="score-display">Score: ${gameScore}</div>
+        </div>
+        
+        <div class="text-center mb-4">
+            <img src="${malware.image}" alt="Malware protection" class="game-gif rounded">
+        </div>
+        
+        <div class="malware-example card mb-4">
+            <div class="card-body">
+                <h5>${malware.type}</h5>
+                <p>${malware.description}</p>
+            </div>
+        </div>
+        
+        <div class="game-actions text-center">
+            <div class="alert alert-info">
+                <strong>Protection Tip:</strong> ${malware.protection}
+            </div>
+            <button class="btn btn-primary btn-lg" onclick="nextMalwareRound()">
+                Continue
+            </button>
+        </div>
+    `;
+}
+
+function loadSocialRound() {
+    if (currentRound >= totalRounds) {
+        endGame();
+        return;
+    }
+
+    const scenario = socialEngineeringScenarios[currentRound % socialEngineeringScenarios.length];
+    const gameContainer = document.getElementById('gameContainer');
+    
+    gameContainer.innerHTML = `
+        <div class="game-header text-center mb-4">
+            <h3>Social Engineering Challenge - Round ${currentRound + 1}/${totalRounds}</h3>
+            <p>Is this scenario dangerous or safe?</p>
+            <div class="score-display">Score: ${gameScore}</div>
+        </div>
+        
+        <div class="text-center mb-4">
+            <img src="${scenario.image}" alt="Social engineering" class="game-gif rounded">
+        </div>
+        
+        <div class="scenario-example card mb-4">
+            <div class="card-body text-center">
+                <p class="lead">"${scenario.scenario}"</p>
+            </div>
+        </div>
+        
+        <div class="game-actions text-center">
+            <button class="btn btn-danger btn-lg me-3" onclick="checkSocialAnswer(true)">
+                Dangerous
+            </button>
+            <button class="btn btn-success btn-lg" onclick="checkSocialAnswer(false)">
+                Safe
+            </button>
+        </div>
+    `;
+}
+
+function loadNetworkRound() {
+    if (currentRound >= totalRounds) {
+        endGame();
+        return;
+    }
+
+    const scenario = networkScenarios[currentRound % networkScenarios.length];
+    const gameContainer = document.getElementById('gameContainer');
+    
+    gameContainer.innerHTML = `
+        <div class="game-header text-center mb-4">
+            <h3>Network Defender - Round ${currentRound + 1}/${totalRounds}</h3>
+            <p>Is this network configuration secure?</p>
+            <div class="score-display">Score: ${gameScore}</div>
+        </div>
+        
+        <div class="text-center mb-4">
+            <img src="${scenario.image}" alt="Network security" class="game-gif rounded">
+        </div>
+        
+        <div class="scenario-example card mb-4">
+            <div class="card-body text-center">
+                <p class="lead">${scenario.scenario}</p>
+            </div>
+        </div>
+        
+        <div class="game-actions text-center">
+            <button class="btn btn-success btn-lg me-3" onclick="checkNetworkAnswer(true)">
+                Secure
+            </button>
+            <button class="btn btn-danger btn-lg" onclick="checkNetworkAnswer(false)">
+                Insecure
+            </button>
+        </div>
+    `;
+}
+
+function loadPrivacyRound() {
+    if (currentRound >= totalRounds) {
+        endGame();
+        return;
+    }
+
+    const scenario = privacyScenarios[currentRound % privacyScenarios.length];
+    const gameContainer = document.getElementById('gameContainer');
+    
+    gameContainer.innerHTML = `
+        <div class="game-header text-center mb-4">
+            <h3>Data Privacy Challenge - Round ${currentRound + 1}/${totalRounds}</h3>
+            <p>Is this practice privacy-friendly?</p>
+            <div class="score-display">Score: ${gameScore}</div>
+        </div>
+        
+        <div class="text-center mb-4">
+            <img src="${scenario.image}" alt="Data privacy" class="game-gif rounded">
+        </div>
+        
+        <div class="scenario-example card mb-4">
+            <div class="card-body text-center">
+                <p class="lead">${scenario.scenario}</p>
+            </div>
+        </div>
+        
+        <div class="game-actions text-center">
+            <button class="btn btn-success btn-lg me-3" onclick="checkPrivacyAnswer(true)">
+                Private
+            </button>
+            <button class="btn btn-danger btn-lg" onclick="checkPrivacyAnswer(false)">
+                Not Private
+            </button>
+        </div>
+    `;
+}
+
+// Answer checking functions
 function checkPhishingAnswer(userSaidPhishing) {
-    const email = phishingEmails[currentRound];
+    const email = phishingEmails[currentRound % phishingEmails.length];
     const isCorrect = (userSaidPhishing === email.isPhishing);
     
     if (isCorrect) {
@@ -188,7 +454,7 @@ function checkPhishingAnswer(userSaidPhishing) {
 }
 
 function checkPasswordAnswer(userStrength) {
-    const password = passwordExamples[currentRound];
+    const password = passwordExamples[currentRound % passwordExamples.length];
     const isCorrect = (userStrength === password.strength);
     
     if (isCorrect) {
@@ -200,6 +466,59 @@ function checkPasswordAnswer(userStrength) {
     
     currentRound++;
     setTimeout(loadPasswordRound, 3000);
+}
+
+function nextMalwareRound() {
+    gameScore += 10;
+    showGameFeedback('Good job! +10 points', 'success', ['Keep learning about malware protection!']);
+    
+    currentRound++;
+    setTimeout(loadMalwareRound, 3000);
+}
+
+function checkSocialAnswer(userSaidDangerous) {
+    const scenario = socialEngineeringScenarios[currentRound % socialEngineeringScenarios.length];
+    const isCorrect = (userSaidDangerous === scenario.isDangerous);
+    
+    if (isCorrect) {
+        gameScore += 10;
+        showGameFeedback('Correct! 🎉', 'success', ['You recognized the social engineering attempt!']);
+    } else {
+        showGameFeedback('Incorrect! 😞', 'danger', ['Be careful with unexpected requests for information']);
+    }
+    
+    currentRound++;
+    setTimeout(loadSocialRound, 3000);
+}
+
+function checkNetworkAnswer(userSaidSecure) {
+    const scenario = networkScenarios[currentRound % networkScenarios.length];
+    const isCorrect = (userSaidSecure === scenario.isSecure);
+    
+    if (isCorrect) {
+        gameScore += 10;
+        showGameFeedback('Correct! 🎉', 'success', ['Good network security awareness!']);
+    } else {
+        showGameFeedback('Incorrect! 😞', 'danger', ['Always use secure network configurations']);
+    }
+    
+    currentRound++;
+    setTimeout(loadNetworkRound, 3000);
+}
+
+function checkPrivacyAnswer(userSaidPrivate) {
+    const scenario = privacyScenarios[currentRound % privacyScenarios.length];
+    const isCorrect = (userSaidPrivate === scenario.isPrivate);
+    
+    if (isCorrect) {
+        gameScore += 10;
+        showGameFeedback('Correct! 🎉', 'success', ['Excellent privacy awareness!']);
+    } else {
+        showGameFeedback('Incorrect! 😞', 'danger', ['Protect your personal data online']);
+    }
+    
+    currentRound++;
+    setTimeout(loadPrivacyRound, 3000);
 }
 
 function showGameFeedback(message, type, clues) {
@@ -251,7 +570,16 @@ function saveGameScore() {
     if (!user) return;
     
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    const gameName = currentGame === 'phishing' ? 'Phishing Spotter' : 'Password Defender';
+    const gameNames = {
+        'phishing': 'Phishing Spotter',
+        'password': 'Password Defender',
+        'malware': 'Malware Hunter',
+        'social': 'Social Engineering Challenge',
+        'network': 'Network Defender',
+        'privacy': 'Data Privacy Challenge'
+    };
+    
+    const gameName = gameNames[currentGame] || 'Cybersecurity Game';
     
     const newEntry = {
         username: user.username,
@@ -295,8 +623,16 @@ function updateUserPoints(userId, pointsToAdd) {
 function playAgain() {
     if (currentGame === 'phishing') {
         startPhishingGame();
-    } else {
+    } else if (currentGame === 'password') {
         startPasswordGame();
+    } else if (currentGame === 'malware') {
+        startMalwareGame();
+    } else if (currentGame === 'social') {
+        startSocialGame();
+    } else if (currentGame === 'network') {
+        startNetworkGame();
+    } else if (currentGame === 'privacy') {
+        startPrivacyGame();
     }
 }
 
