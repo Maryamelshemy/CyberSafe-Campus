@@ -26,38 +26,44 @@ body {
 /* ===== NAVIGATION ===== */
 .navbar {
   background: var(--primary-color) !important;
-  padding: 0.5rem 0; /* Reduced from 1rem 0 */
+  padding: 0.3rem 0 !important; /* Further reduced */
+  min-height: 50px !important; /* Force smaller height */
+}
+
+.navbar-brand {
+  padding: 0.2rem 0 !important; /* Reduce brand padding */
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 8px; /* Reduced from 12px */
+  gap: 8px;
 }
 
 .logo-icon {
-  width: 32px; /* Reduced from 40px */
-  height: 32px; /* Reduced from 40px */
+  width: 28px !important; /* Further reduced */
+  height: 28px !important; /* Further reduced */
   background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1rem; /* Reduced from 1.2rem */
+  font-size: 0.9rem !important; /* Further reduced */
 }
 
 .logo-text {
   font-weight: 700;
-  font-size: 1.1rem; /* Reduced from 1.3rem */
+  font-size: 1rem !important; /* Further reduced */
   color: #ffffff;
 }
 
 .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 500;
-  padding: 0.3rem 0.8rem; /* Reduced from 0.5rem 1rem */
-  font-size: 0.9rem; /* Slightly smaller font */
+  padding: 0.2rem 0.6rem !important; /* Further reduced */
+  font-size: 0.85rem !important; /* Further reduced */
+  line-height: 1.2 !important; /* Reduce line height */
 }
 
 .navbar-nav .nav-link:hover,
@@ -65,15 +71,25 @@ body {
   color: #ffffff !important;
 }
 
-/* Adjust hero section padding to account for fixed navbar */
+/* Reduce dropdown menu size */
+.navbar .dropdown-menu {
+  margin-top: 0.2rem !important; /* Reduce dropdown spacing */
+}
+
+.navbar .dropdown-item {
+  padding: 0.4rem 1rem !important; /* Smaller dropdown items */
+  font-size: 0.85rem !important;
+}
+
+/* Adjust hero section padding to account for smaller navbar */
 .hero-section {
-  padding-top: 80px; /* Add padding to account for fixed navbar */
+  padding-top: 60px !important; /* Further reduced to match smaller navbar */
 }
 
 /* ===== HERO SECTION - FIXED ===== */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  padding: 80px 0 100px 0; /* Adjusted top padding */
+  padding: 60px 0 100px 0 !important; /* Further reduced top padding */
   color: #ffffff;
   position: relative;
   overflow: hidden;
