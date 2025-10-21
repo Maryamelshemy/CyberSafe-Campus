@@ -1,4 +1,4 @@
-/* CyberSafe Campus - COMPLETELY FIXED NAVIGATION FOR ALL PAGES */
+/* CyberSafe Campus - Complete Working CSS */
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #3498db;
@@ -19,192 +19,495 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333333;
+  color: #333333; /* Default text color */
   background-color: #ffffff;
-  padding-top: 60px !important; /* FIXED: Consistent for all pages */
 }
 
-/* ===== COMPLETELY FIXED COMPACT NAVIGATION ===== */
+/* ===== NAVIGATION ===== */
 .navbar {
   background: var(--primary-color) !important;
-  padding: 0 !important;
-  min-height: 60px !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  position: fixed !important;
-  top: 0 !important;
-  width: 100% !important;
-  z-index: 1030 !important;
-}
-
-.navbar > .container {
-  padding: 0 1rem;
-}
-
-.navbar-brand {
-  padding: 0.5rem 0 !important;
-  margin: 0 !important;
-  display: flex;
-  align-items: center;
-  height: 60px;
+  padding: 1rem 0;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 0 !important;
+  gap: 12px;
 }
 
 .logo-icon {
-  width: 28px !important;
-  height: 28px !important;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 0.8rem !important;
-  margin: 0 !important;
+  font-size: 1.2rem;
 }
 
 .logo-text {
   font-weight: 700;
-  font-size: 0.95rem !important;
+  font-size: 1.3rem;
   color: #ffffff;
-  margin: 0 !important;
-}
-
-.navbar-nav {
-  margin: 0 !important;
-  align-items: center;
-}
-
-.navbar-nav .nav-item {
-  margin: 0 !important;
 }
 
 .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 500;
-  padding: 0.8rem 0.8rem !important;
-  font-size: 0.85rem !important;
-  margin: 0 !important;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  padding: 0.5rem 1rem;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
   color: #ffffff !important;
-  background-color: rgba(255, 255, 255, 0.15);
 }
 
-.navbar-toggler {
-  padding: 0.25rem 0.4rem !important;
-  font-size: 0.8rem !important;
-  border: none !important;
-  margin: 0 !important;
-}
-
-/* ===== FIXED HERO SECTIONS FOR ALL PAGES ===== */
+/* ===== HERO SECTION - FIXED ===== */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  padding: 2rem 0 !important;
+  padding: 140px 0 100px 0;
   color: #ffffff;
   position: relative;
   overflow: hidden;
-  margin-top: 0 !important;
-}
-
-.lessons-hero {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  padding: 2rem 0 !important;
-  color: #ffffff;
-  margin-top: 0 !important;
-}
-
-/* Fix for specific page hero sections */
-.hero-section.text-white.py-5.mt-5,
-.hero-section.text-white.py-4 {
-  padding-top: 2rem !important;
-  padding-bottom: 2rem !important;
-  margin-top: 0 !important;
-}
-
-/* Remove excess white space from all sections */
-section {
-  margin: 0 !important;
-}
-
-.py-5 {
-  padding-top: 2rem !important;
-  padding-bottom: 2rem !important;
-}
-
-.mt-5 {
-  margin-top: 2rem !important;
-}
-
-/* ===== FIXED RATING STYLES ===== */
-.rating-stars {
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
 }
 
-.rating-stars .fas.fa-star {
-  color: #ffc107 !important;
-  font-size: 0.9rem;
+.hero-section * {
+  color: #ffffff !important; /* Force white text in hero section */
 }
 
-.rating-text {
-  font-size: 0.9rem;
-  margin-left: 0.5rem;
-  color: rgba(255, 255, 255, 0.9) !important;
-}
-
-/* ===== ENHANCED LESSON STYLES ===== */
-.lesson-intro {
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  padding: 1.5rem;
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  border-left: 4px solid var(--secondary-color);
 }
 
-.lesson-intro h5 {
-  color: var(--primary-color);
+.hero-content .lead {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-light {
+  background: #ffffff;
+  color: var(--primary-color) !important;
+  border-color: #ffffff;
+}
+
+.btn-light:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-outline-light {
+  background: transparent;
+  color: #ffffff !important;
+  border-color: #ffffff;
+}
+
+.btn-outline-light:hover {
+  background: #ffffff;
+  color: var(--primary-color) !important;
+  transform: translateY(-2px);
+}
+
+/* ===== CYBERSECURITY GRAPHIC ===== */
+.cyber-graphic {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.cyber-shield {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(52, 152, 219, 0.6);
+}
+
+.protection-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ring {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ring-1 {
+  width: 200px;
+  height: 200px;
+}
+
+.ring-2 {
+  width: 280px;
+  height: 280px;
+}
+
+.ring-3 {
+  width: 360px;
+  height: 360px;
+}
+
+.security-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.element {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  backdrop-filter: blur(10px);
+}
+
+.el-1 { top: 20%; left: 20%; }
+.el-2 { top: 20%; right: 20%; }
+.el-3 { bottom: 30%; left: 15%; }
+.el-4 { bottom: 20%; right: 25%; }
+
+.floating-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 3s infinite ease-in-out;
+}
+
+.dot-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.dot-2 { top: 80%; left: 20%; animation-delay: 0.5s; }
+.dot-3 { top: 30%; right: 15%; animation-delay: 1s; }
+.dot-4 { bottom: 20%; left: 30%; animation-delay: 1.5s; }
+.dot-5 { top: 60%; right: 25%; animation-delay: 2s; }
+.dot-6 { bottom: 40%; right: 10%; animation-delay: 2.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.wave-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 100px;
+}
+
+.wave-divider .shape-fill {
+  fill: #FFFFFF;
+}
+
+/* ===== FEATURES SECTION ===== */
+#features {
+  padding: 5rem 0;
+  background: var(--light-bg);
+}
+
+.feature-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+}
+
+/* ===== STATS SECTION ===== */
+.bg-primary {
+  background: var(--primary-color) !important;
+  padding: 4rem 0;
+}
+
+.bg-primary * {
+  color: #ffffff !important;
+}
+
+.stat-item {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.stat-item h3 {
+  font-size: 3.5rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
-.interactive-lesson-img {
-  width: 100%;
-  border-radius: 10px;
-  margin: 15px 0;
+.stat-item p {
+  opacity: 0.9;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* ===== LEARNING PATH ===== */
+.learning-path-section {
+  padding: 5rem 0;
+}
+
+.learning-path-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 15px;
+  background: white;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  height: 200px;
-  object-fit: cover;
+  transition: all 0.3s ease;
+  height: 100%;
+  border: 1px solid #e9ecef;
 }
 
-/* Educational Video Styles */
-.educational-video {
-  margin: 20px 0;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 10px;
-  border-left: 4px solid var(--secondary-color);
+.learning-path-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
-.educational-video h6 {
+.path-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.learning-path-card h5 {
+  margin-bottom: 1rem;
   color: var(--primary-color);
-  margin-bottom: 10px;
+  font-weight: 600;
 }
 
-.ratio-16x9 {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.learning-path-card p {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* ===== CTA SECTION ===== */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+  padding: 4rem 0;
+  color: #ffffff;
+}
+
+.bg-gradient-primary * {
+  color: #ffffff !important;
+}
+
+.bg-gradient-primary h2 {
+  margin-bottom: 1rem;
+}
+
+.bg-gradient-primary .lead {
+  opacity: 0.9;
+}
+
+/* ===== FOOTER ===== */
+.bg-dark {
+  background: #343a40 !important;
+  padding: 3rem 0 2rem;
+}
+
+.bg-dark * {
+  color: #ffffff !important;
+}
+
+.footer-logo {
+  margin-bottom: 1rem;
+}
+
+.footer-logo .logo-icon {
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+}
+
+.footer-logo .logo-text {
+  font-size: 1.1rem;
+}
+
+.social-links a {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.social-links a:hover {
+  transform: translateY(-3px);
+  color: var(--secondary-color) !important;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content .lead {
+    font-size: 1.1rem;
+  }
+  
+  .cyber-graphic {
+    width: 300px;
+    height: 300px;
+    margin-top: 2rem;
+  }
+  
+  .cyber-shield {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+  
+  .ring-1 {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .ring-2 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .ring-3 {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .element {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.mt-5 {
+  margin-top: 3rem;
+}
+
+.display-4 {
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.display-5 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.display-6 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
 }
 
 /* ===== CARD STYLES ===== */
@@ -213,7 +516,6 @@ section {
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
-  margin-bottom: 1.5rem;
 }
 
 .card:hover {
@@ -224,22 +526,11 @@ section {
 .card-header {
   background: white;
   border-bottom: 1px solid #e9ecef;
-  padding: 1.25rem;
+  padding: 1.5rem;
 }
 
 .card-body {
   padding: 1.5rem;
-}
-
-/* ===== BUTTON STYLES ===== */
-.btn {
-  border-radius: 8px;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
 }
 
 /* ===== BADGE STYLES ===== */
@@ -257,52 +548,184 @@ section {
 .bg-info { background: var(--secondary-color) !important; }
 .bg-purple { background: #6f42c1 !important; }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-  body {
-    padding-top: 56px !important;
-  }
-  
-  .navbar {
-    min-height: 56px !important;
-  }
-  
-  .navbar-brand {
-    height: 56px;
-  }
-  
-  .hero-section,
-  .lessons-hero {
-    padding: 1.5rem 0 !important;
-  }
-  
-  .hero-content h1 {
-    font-size: 1.8rem !important;
-  }
+/* ===== FORM STYLES ===== */
+.form-control {
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
 }
 
-/* Utility classes */
-.text-center {
+.form-control:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+/* ===== TABLE STYLES ===== */
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background: var(--light-bg);
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.table tbody td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-color: #e9ecef;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress {
+  background: #e9ecef;
+  border-radius: 10px;
+  height: 8px;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--secondary-color), var(--success-color));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+/* ===== GAME STYLES ===== */
+.game-container {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.game-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 1.5rem;
   text-align: center;
 }
 
-.mb-4 {
-  margin-bottom: 1.5rem;
-}
-
-.display-4 {
+.game-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   font-size: 3rem;
-  font-weight: 700;
 }
 
-.display-5 {
-  font-size: 2.5rem;
-  font-weight: 700;
+/* ===== INTERACTIVE LESSON STYLES ===== */
+.interactive-lesson-img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  height: 200px;
+  object-fit: cover;
 }
 
-.lead {
-  font-size: 1.25rem;
-  font-weight: 300;
+.lesson-gif {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin: 15px auto;
+  display: block;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.game-gif {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  margin: 15px auto;
+  display: block;
+}
+
+/* Fix Leaderboard Text Visibility */
+.leaderboard-item {
+    color: #333333;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table td, .table th {
+    border-color: #dee2e6;
+}
+
+.card-body, .card-header, .card-title {
+    color: #333333;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+/* Fix rank badges */
+.rank-badge {
+    font-weight: bold;
+    font-size: 1.1em;
+    min-width: 30px;
+    text-align: center;
+}
+
+.rank-1-badge {
+    color: #ffd700;
+}
+
+.rank-2-badge {
+    color: #c0c0c0;
+}
+
+.rank-3-badge {
+    color: #cd7f32;
+}
+
+/* Fix progress bars */
+.progress {
+    background-color: #e9ecef;
+}
+
+/* Fix navigation text */
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #ffffff;
+}
+
+/* Fix white backgrounds */
+.bg-light {
+    background-color: #f8f9fa;
+}
+
+.bg-light *:not(.btn):not(.badge):not(.navbar-dark *) {
+    color: #333333;
+}
+
+/* Fix badges */
+.badge.bg-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.badge.bg-success {
+    background-color: #28a745;
+    color: white;
 }
 
 /* Tip cards */
@@ -312,4 +735,89 @@ section {
   background: white;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   height: 100%;
+}
+
+/* Practice exercise */
+.practice-exercise {
+  border-left: 4px solid var(--secondary-color);
+}
+
+/* Alert variations */
+.alert-purple {
+  background-color: #e2e3ff;
+  border-color: #6f42c1;
+  color: #6f42c1;
+}
+
+.alert-orange {
+  background-color: #fff3cd;
+  border-color: #fd7e14;
+  color: #856404;
+}
+/* Add this to your existing CSS.css file */
+
+/* Educational Video Styles */
+.educational-video {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.educational-video h6 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.ratio-16x9 {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Enhanced lesson content styles */
+.lesson-content {
+    transition: all 0.3s ease;
+}
+
+.lesson-content ul {
+    margin-left: 20px;
+}
+
+.lesson-content li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Improved image styles */
+.interactive-lesson-img {
+    width: 100%;
+    border-radius: 10px;
+    margin: 15px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Enhanced game styles */
+.game-gif {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 15px auto;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Additional responsive improvements */
+@media (max-width: 768px) {
+    .educational-video {
+        margin: 15px 0;
+        padding: 10px;
+    }
+    
+    .interactive-lesson-img {
+        height: 150px;
+    }
 }
