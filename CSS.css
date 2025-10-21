@@ -21,35 +21,41 @@ body {
   line-height: 1.6;
   color: #333333; /* Default text color */
   background-color: #ffffff;
+  padding-top: 70px; /* Add padding for fixed navbar */
 }
 
-/* ===== NAVIGATION ===== */
+/* ===== FIXED NAVIGATION ===== */
 .navbar {
   background: var(--primary-color) !important;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+  padding: 0.25rem 0;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .logo-text {
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #ffffff;
 }
 
@@ -57,23 +63,23 @@ body {
   color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 500;
   padding: 0.5rem 1rem;
+  font-size: 0.95rem;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
   color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
 }
 
 /* ===== HERO SECTION - FIXED ===== */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  padding: 140px 0 100px 0;
+  padding: 80px 0 60px 0;
   color: #ffffff;
   position: relative;
   overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
 }
 
 .hero-section * {
@@ -81,13 +87,25 @@ body {
 }
 
 .hero-content h1 {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
 }
 
+@media (min-width: 768px) {
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-content h1 {
+    font-size: 3.5rem;
+  }
+}
+
 .hero-content .lead {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.9;
 }
@@ -102,7 +120,7 @@ body {
 .btn {
   border-radius: 8px;
   font-weight: 600;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1.5rem;
   border: 2px solid transparent;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -130,6 +148,52 @@ body {
   background: #ffffff;
   color: var(--primary-color) !important;
   transform: translateY(-2px);
+}
+
+/* ===== ENHANCED LESSON STYLES ===== */
+.lesson-intro {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--secondary-color);
+}
+
+.lesson-intro h5 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.lesson-basics {
+  background-color: #e8f4fd;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1rem 0;
+}
+
+.lesson-basics h6 {
+  color: var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.lesson-step {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.step-number {
+  background-color: var(--secondary-color);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 1rem;
+  flex-shrink: 0;
 }
 
 /* ===== CYBERSECURITY GRAPHIC ===== */
@@ -425,8 +489,20 @@ body {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
+  body {
+    padding-top: 60px;
+  }
+  
+  .navbar {
+    padding: 0.25rem 0;
+  }
+  
+  .logo-text {
+    font-size: 1rem;
+  }
+  
   .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .hero-content .lead {
