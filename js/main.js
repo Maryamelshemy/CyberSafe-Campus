@@ -1,25 +1,10 @@
-// main.js - Fixed for compact navigation
+// main.js - Fixed for new authentication system
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     checkUserLoginStatus();
     initializePageAnimations();
-    fixNavigationSpacing();
 });
-
-// FIXED: Navigation spacing fix
-function fixNavigationSpacing() {
-    // Remove any excess margin/padding from hero sections
-    const heroSections = document.querySelectorAll('.hero-section');
-    heroSections.forEach(section => {
-        section.style.paddingTop = '2rem';
-        section.style.paddingBottom = '2rem';
-        section.style.marginTop = '0';
-    });
-    
-    // Ensure body padding matches navbar height
-    document.body.style.paddingTop = '56px';
-}
 
 // FIXED: Uses new authentication system
 function checkUserLoginStatus() {
@@ -63,6 +48,15 @@ function initializePageAnimations() {
 // FIXED: Uses new authentication system
 function isUserLoggedIn() {
     return localStorage.getItem('current_user') !== null;
+}
+
+// FIXED: Uses new authentication system
+function getCurrentUser() {
+    try {
+        return JSON.parse(localStorage.getItem('current_user'));
+    } catch (error) {
+        return null;
+    }
 }
 
 // Save user progress - FIXED for new system
