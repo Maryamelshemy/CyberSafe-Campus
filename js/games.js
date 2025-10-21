@@ -86,36 +86,62 @@ const passwordExamples = [
     }
 ];
 
-const malwareExamples = [
+// FIXED: Malware Hunter Game - Now with actual quiz questions
+const malwareQuizQuestions = [
     {
-        type: "Ransomware",
-        description: "Encrypts your files and demands payment to restore access. Often spreads through phishing emails or malicious downloads.",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        protection: "Regular backups, updated antivirus, and cautious email practices"
+        question: "What is the main characteristic of ransomware?",
+        options: [
+            "It steals your personal information",
+            "It encrypts your files and demands payment",
+            "It slows down your computer",
+            "It displays unwanted advertisements"
+        ],
+        correctAnswer: 1,
+        explanation: "Ransomware encrypts files and demands ransom for decryption."
     },
     {
-        type: "Trojan Horse",
-        description: "Disguised as legitimate software but contains malicious code that creates backdoors for attackers.",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        protection: "Download software only from official sources and verify digital signatures"
+        question: "How does a Trojan horse malware typically spread?",
+        options: [
+            "By replicating itself across networks",
+            "By disguising itself as legitimate software",
+            "Through email attachments only",
+            "By exploiting browser vulnerabilities"
+        ],
+        correctAnswer: 1,
+        explanation: "Trojans appear to be useful software but contain malicious code."
     },
     {
-        type: "Spyware",
-        description: "Secretly monitors user activity, captures keystrokes, and collects sensitive information without consent.",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        protection: "Use anti-spyware tools and avoid suspicious downloads"
+        question: "What is the primary purpose of spyware?",
+        options: [
+            "To encrypt your files",
+            "To monitor your activity and collect information",
+            "To overload your network",
+            "To display advertisements"
+        ],
+        correctAnswer: 1,
+        explanation: "Spyware secretly monitors user activity and collects sensitive information."
     },
     {
-        type: "Worm",
-        description: "Self-replicating malware that spreads across networks without user interaction, often exploiting vulnerabilities.",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        protection: "Keep systems updated and use network segmentation"
+        question: "Which of these is NOT a common way to protect against malware?",
+        options: [
+            "Keeping software updated",
+            "Using antivirus software",
+            "Clicking on suspicious links to test them",
+            "Being cautious with email attachments"
+        ],
+        correctAnswer: 2,
+        explanation: "Clicking on suspicious links is dangerous and can lead to malware infection."
     },
     {
-        type: "Adware",
-        description: "Displays unwanted advertisements and may track browsing habits for marketing purposes.",
-        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        protection: "Use ad blockers and be cautious with free software downloads"
+        question: "What should you do if you suspect your computer has malware?",
+        options: [
+            "Continue using it normally",
+            "Run a antivirus scan immediately",
+            "Ignore it and hope it goes away",
+            "Share files with others to warn them"
+        ],
+        correctAnswer: 1,
+        explanation: "Running an antivirus scan is the first step to identify and remove malware."
     }
 ];
 
@@ -272,6 +298,7 @@ function startPasswordGame() {
     loadPasswordRound();
 }
 
+// FIXED: Malware Hunter Game - Now with proper quiz functionality
 function startMalwareGame() {
     if (!isUserLoggedIn()) {
         alert('Please log in to play games and save your progress!');
@@ -282,7 +309,7 @@ function startMalwareGame() {
     currentGame = 'malware';
     gameScore = 0;
     currentRound = 0;
-    currentGameData = shuffleArray(malwareExamples).slice(0, totalRounds);
+    currentGameData = shuffleArray(malwareQuizQuestions).slice(0, totalRounds);
     
     document.querySelector('section.py-5').classList.add('d-none');
     document.getElementById('gameInterface').classList.remove('d-none');
@@ -429,39 +456,42 @@ function loadPasswordRound() {
     `;
 }
 
+// FIXED: Malware Hunter Game - Now with proper quiz interface
 function loadMalwareRound() {
-    if (currentRound >= totalRounds) {
+    if (currentRound >= currentGameData.length) {
         endGame();
         return;
     }
 
-    const malware = currentGameData[currentRound];
+    const question = currentGameData[currentRound];
     const gameContainer = document.getElementById('gameContainer');
     
     gameContainer.innerHTML = `
         <div class="game-header text-center mb-4">
-            <h3>Malware Hunter - Round ${currentRound + 1}/${totalRounds}</h3>
-            <p>Identify the correct protection method for this malware type:</p>
+            <h3>Malware Hunter - Round ${currentRound + 1}/${currentGameData.length}</h3>
+            <p>Answer the question about malware:</p>
             <div class="score-display">Score: ${gameScore}</div>
         </div>
         
-        <div class="text-center mb-4">
-            <img src="${malware.image}" alt="Malware protection" class="game-gif rounded">
-        </div>
-        
-        <div class="malware-example card mb-4">
+        <div class="question-card card mb-4">
             <div class="card-body">
-                <h5>${malware.type}</h5>
-                <p>${malware.description}</p>
+                <h5 class="card-title">${question.question}</h5>
+                <div class="options mt-3">
+                    ${question.options.map((option, index) => `
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="malwareQuestion" id="option${index}" value="${index}">
+                            <label class="form-check-label" for="option${index}">
+                                ${option}
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
         </div>
         
         <div class="game-actions text-center">
-            <div class="alert alert-info">
-                <strong>Protection Tip:</strong> ${malware.protection}
-            </div>
-            <button class="btn btn-primary btn-lg" onclick="nextMalwareRound()">
-                Continue
+            <button class="btn btn-primary btn-lg" onclick="checkMalwareAnswer()">
+                Submit Answer
             </button>
         </div>
     `;
@@ -609,9 +639,25 @@ function checkPasswordAnswer(userStrength) {
     setTimeout(loadPasswordRound, 3000);
 }
 
-function nextMalwareRound() {
-    gameScore += 10;
-    showGameFeedback('Good job! +10 points', 'success', ['Keep learning about malware protection!']);
+// FIXED: Malware Hunter Game - Now with proper answer checking
+function checkMalwareAnswer() {
+    const selectedOption = document.querySelector('input[name="malwareQuestion"]:checked');
+    
+    if (!selectedOption) {
+        alert('Please select an answer!');
+        return;
+    }
+    
+    const userAnswer = parseInt(selectedOption.value);
+    const question = currentGameData[currentRound];
+    const isCorrect = (userAnswer === question.correctAnswer);
+    
+    if (isCorrect) {
+        gameScore += 10;
+        showGameFeedback('Correct! 🎉', 'success', [question.explanation]);
+    } else {
+        showGameFeedback('Incorrect! 😞', 'danger', [question.explanation]);
+    }
     
     currentRound++;
     setTimeout(loadMalwareRound, 3000);
@@ -815,3 +861,10 @@ function checkUserLoginStatus() {
         document.getElementById('loginLink').classList.add('d-none');
     }
 }
+
+// Make functions globally available
+window.startMalwareGame = startMalwareGame;
+window.checkMalwareAnswer = checkMalwareAnswer;
+window.playAgain = playAgain;
+window.backToGames = backToGames;
+window.saveGameScore = saveGameScore;
