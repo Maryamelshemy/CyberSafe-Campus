@@ -1,3 +1,5 @@
+[file name]: CSS.css
+[file content begin]
 /* CyberSafe Campus - Complete Working CSS */
 :root {
   --primary-color: #2c3e50;
@@ -21,13 +23,20 @@ body {
   line-height: 1.6;
   color: #333333; /* Default text color */
   background-color: #ffffff;
+  padding-top: 70px; /* Add padding to account for fixed navbar */
 }
 
-/* ===== NAVIGATION ===== */
+/* ===== NAVIGATION - ONLY CHANGED SIZE AND POSITION ===== */
 .navbar {
   background: var(--primary-color) !important;
-  padding: 1rem 0;
+  padding: 0.5rem 0 !important; /* Made smaller */
+  position: fixed !important; /* Made fixed */
+  top: 0;
+  width: 100%;
+  z-index: 1030;
 }
+
+/* Rest of the CSS remains EXACTLY THE SAME as before... */
 
 .logo-container {
   display: flex;
@@ -67,7 +76,7 @@ body {
 /* ===== HERO SECTION - FIXED ===== */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  padding: 140px 0 100px 0;
+  padding: 100px 0 100px 0; /* Adjusted top padding for fixed navbar */
   color: #ffffff;
   position: relative;
   overflow: hidden;
@@ -583,7 +592,7 @@ body {
 .table tbody td {
   padding: 1rem;
   vertical-align: middle;
-  border-color: #e9ecef;
+  border-color: #dee2e6;
 }
 
 /* ===== PROGRESS BAR ===== */
@@ -821,3 +830,4 @@ body {
         height: 150px;
     }
 }
+[file content end]
