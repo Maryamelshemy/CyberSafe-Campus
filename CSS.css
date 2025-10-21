@@ -1,4 +1,4 @@
-/* CyberSafe Campus - COMPLETELY FIXED NAVIGATION */
+/* CyberSafe Campus - COMPLETELY FIXED NAVIGATION FOR ALL PAGES */
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #3498db;
@@ -21,27 +21,31 @@ body {
   line-height: 1.6;
   color: #333333;
   background-color: #ffffff;
-  padding-top: 56px; /* FIXED: Reduced from 70px to 56px */
+  padding-top: 60px !important; /* FIXED: Consistent for all pages */
 }
 
 /* ===== COMPLETELY FIXED COMPACT NAVIGATION ===== */
 .navbar {
   background: var(--primary-color) !important;
-  padding: 0 !important; /* REMOVED all padding */
-  min-height: 56px !important; /* FIXED height */
+  padding: 0 !important;
+  min-height: 60px !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: fixed !important;
+  top: 0 !important;
+  width: 100% !important;
+  z-index: 1030 !important;
 }
 
 .navbar > .container {
-  padding: 0 1rem; /* Container padding only */
+  padding: 0 1rem;
 }
 
 .navbar-brand {
-  padding: 0.5rem 0 !important; /* Minimal padding */
+  padding: 0.5rem 0 !important;
   margin: 0 !important;
   display: flex;
   align-items: center;
-  height: 56px; /* Match navbar height */
+  height: 60px;
 }
 
 .logo-container {
@@ -52,21 +56,21 @@ body {
 }
 
 .logo-icon {
-  width: 28px !important; /* SMALLER */
-  height: 28px !important; /* SMALLER */
+  width: 28px !important;
+  height: 28px !important;
   background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 0.8rem !important; /* SMALLER */
+  font-size: 0.8rem !important;
   margin: 0 !important;
 }
 
 .logo-text {
   font-weight: 700;
-  font-size: 0.95rem !important; /* SMALLER */
+  font-size: 0.95rem !important;
   color: #ffffff;
   margin: 0 !important;
 }
@@ -83,8 +87,8 @@ body {
 .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.9) !important;
   font-weight: 500;
-  padding: 0.8rem 0.8rem !important; /* COMPACT padding */
-  font-size: 0.85rem !important; /* SMALLER */
+  padding: 0.8rem 0.8rem !important;
+  font-size: 0.85rem !important;
   margin: 0 !important;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -103,64 +107,61 @@ body {
   margin: 0 !important;
 }
 
-.navbar-toggler:focus {
-  box-shadow: none !important;
-}
-
-/* Dropdown menu fixes */
-.dropdown-menu {
-  border: none;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-top: 0 !important;
-}
-
-.dropdown-item {
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-}
-
-/* ===== HERO SECTION - FIXED SPACING ===== */
+/* ===== FIXED HERO SECTIONS FOR ALL PAGES ===== */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-  padding: 40px 0 30px 0 !important; /* REDUCED padding */
+  padding: 2rem 0 !important;
   color: #ffffff;
   position: relative;
   overflow: hidden;
   margin-top: 0 !important;
 }
 
-.hero-section.text-white.py-5.mt-5 {
-  padding-top: 2rem !important; /* Override large padding */
+.lessons-hero {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 2rem 0 !important;
+  color: #ffffff;
+  margin-top: 0 !important;
+}
+
+/* Fix for specific page hero sections */
+.hero-section.text-white.py-5.mt-5,
+.hero-section.text-white.py-4 {
+  padding-top: 2rem !important;
   padding-bottom: 2rem !important;
   margin-top: 0 !important;
 }
 
-.hero-section * {
-  color: #ffffff !important;
+/* Remove excess white space from all sections */
+section {
+  margin: 0 !important;
 }
 
-.hero-content h1 {
-  font-size: 2rem; /* Smaller for better fit */
-  font-weight: 700;
-  margin-bottom: 1rem;
+.py-5 {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
 }
 
-@media (min-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
+.mt-5 {
+  margin-top: 2rem !important;
 }
 
-@media (min-width: 992px) {
-  .hero-content h1 {
-    font-size: 3rem;
-  }
+/* ===== FIXED RATING STYLES ===== */
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.hero-content .lead {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.9;
+.rating-stars .fas.fa-star {
+  color: #ffc107 !important;
+  font-size: 0.9rem;
+}
+
+.rating-text {
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+  color: rgba(255, 255, 255, 0.9) !important;
 }
 
 /* ===== ENHANCED LESSON STYLES ===== */
@@ -177,36 +178,13 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.lesson-basics {
-  background-color: #e8f4fd;
-  border-radius: 8px;
-  padding: 1.25rem;
-  margin: 1rem 0;
-}
-
-.lesson-basics h6 {
-  color: var(--primary-color);
-  margin-bottom: 0.75rem;
-}
-
-.lesson-step {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-}
-
-.step-number {
-  background-color: var(--secondary-color);
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-right: 1rem;
-  flex-shrink: 0;
+.interactive-lesson-img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  height: 200px;
+  object-fit: cover;
 }
 
 /* Educational Video Styles */
@@ -227,20 +205,6 @@ body {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Enhanced lesson content styles */
-.lesson-content {
-  transition: all 0.3s ease;
-}
-
-.lesson-content ul {
-  margin-left: 20px;
-}
-
-.lesson-content li {
-  margin-bottom: 8px;
-  line-height: 1.5;
 }
 
 /* ===== CARD STYLES ===== */
@@ -278,29 +242,6 @@ body {
   display: inline-block;
 }
 
-.btn-light {
-  background: #ffffff;
-  color: var(--primary-color) !important;
-  border-color: #ffffff;
-}
-
-.btn-light:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.btn-outline-light {
-  background: transparent;
-  color: #ffffff !important;
-  border-color: #ffffff;
-}
-
-.btn-outline-light:hover {
-  background: #ffffff;
-  color: var(--primary-color) !important;
-  transform: translateY(-2px);
-}
-
 /* ===== BADGE STYLES ===== */
 .badge {
   font-size: 0.8em;
@@ -319,77 +260,28 @@ body {
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   body {
-    padding-top: 52px; /* Even smaller for mobile */
+    padding-top: 56px !important;
   }
   
   .navbar {
-    min-height: 52px !important;
+    min-height: 56px !important;
   }
   
   .navbar-brand {
-    height: 52px;
+    height: 56px;
   }
   
-  .logo-text {
-    font-size: 0.9rem !important;
-  }
-  
-  .navbar-nav .nav-link {
-    padding: 0.6rem 0.8rem !important;
-    font-size: 0.8rem !important;
+  .hero-section,
+  .lessons-hero {
+    padding: 1.5rem 0 !important;
   }
   
   .hero-content h1 {
-    font-size: 1.8rem;
-  }
-  
-  .hero-content .lead {
-    font-size: 1rem;
+    font-size: 1.8rem !important;
   }
 }
 
-/* Fix for all pages to remove excess spacing */
-.py-5 {
-  padding-top: 2rem !important;
-  padding-bottom: 2rem !important;
-}
-
-.mt-5 {
-  margin-top: 2rem !important;
-}
-
-/* Ensure images don't cause layout issues */
-.interactive-lesson-img {
-  width: 100%;
-  border-radius: 10px;
-  margin: 15px 0;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  height: 200px;
-  object-fit: cover;
-}
-
-/* Practice exercise */
-.practice-exercise {
-  border-left: 4px solid var(--secondary-color);
-}
-
-/* Alert variations */
-.alert-purple {
-  background-color: #e2e3ff;
-  border-color: #6f42c1;
-  color: #6f42c1;
-}
-
-/* Tip cards */
-.tip-card {
-  padding: 1.5rem;
-  border-radius: 10px;
-  background: white;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  height: 100%;
-}
-
-/* Additional utility classes */
+/* Utility classes */
 .text-center {
   text-align: center;
 }
@@ -411,4 +303,13 @@ body {
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
+}
+
+/* Tip cards */
+.tip-card {
+  padding: 1.5rem;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  height: 100%;
 }
