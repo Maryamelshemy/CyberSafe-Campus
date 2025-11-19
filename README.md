@@ -10,7 +10,7 @@ CyberSafe Campus is a comprehensive web-based platform designed to make cybersec
 
 ## Key Features
 
-- **Interactive Learning Modules**: 8+ comprehensive cybersecurity lessons.
+- **Interactive Learning Modules**: 6+ comprehensive cybersecurity lessons.
 - **Engaging Games**: Phishing detection and password security challenges.
 - **Assessment System**: Topic-specific quizzes and comprehensive exams.
 - **Progress Tracking**: Points system, achievements, and leaderboard.
